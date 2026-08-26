@@ -6,6 +6,7 @@ import json
 import mimetypes
 import time
 import argparse
+import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -78,10 +79,21 @@ class AppHandler(BaseHTTPRequestHandler):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run the local Checkpoint Counter Lab server.")
-    parser.add_argument("--port", type=int, default=8765, help="Local port (default: 8765)")
+    parser.add_argument(
+        "--host",
+        default=os.environ.get("HOST", "127.0.0.1"),
+        help="Bind address (default: HOST or 127.0.0.1)",
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=int(os.environ.get("PORT", "8765")),
+        help="Listening port (default: PORT or 8765)",
+    )
     args = parser.parse_args()
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), AppHandler)
-    print(f"Checkpoint Counter Lab: http://127.0.0.1:{args.port}")
+    server = ThreadingHTTPServer((args.host, args.port), AppHandler)
+    display_host = "127.0.0.1" if args.host == "0.0.0.0" else args.host
+    print(f"Checkpoint Counter Lab: http://{display_host}:{args.port}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

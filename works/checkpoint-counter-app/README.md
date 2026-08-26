@@ -53,6 +53,35 @@ Open [http://127.0.0.1:8765](http://127.0.0.1:8765) in a browser. The server bin
 
 If Python is already configured with NumPy, `python app.py` is sufficient.
 
+## Docker and Cloud Run
+
+The included `Dockerfile` runs the application as a non-root user, listens on `0.0.0.0`, and reads the Cloud Run `PORT` environment variable (`8080` in the image).
+
+Build and test it locally from this directory:
+
+```powershell
+docker build -t checkpoint-counter-app .
+docker run --rm -p 8080:8080 checkpoint-counter-app
+```
+
+Then open [http://localhost:8080](http://localhost:8080). When configuring a Git-based Cloud Run deployment, select `checkpoint-counter-app/Dockerfile` as the Dockerfile source location if this application remains inside the repository's `checkpoint-counter-app` directory. That directory must be used as the Docker build context.
+
+### Publish from the Google Cloud console
+
+The simplest console-only workflow is continuous deployment from a Git repository:
+
+1. Push this project to GitHub, GitLab, or Bitbucket. Keep `Dockerfile`, `app.py`, `model.py`, `requirements.txt`, and `static/` together inside `checkpoint-counter-app/`.
+2. In Google Cloud Console, select the target project and enable the **Cloud Run API** and **Cloud Build API** when prompted.
+3. Open **Cloud Run**, click **Deploy container**, choose **Service**, and select **Continuously deploy new revisions from a source repository**.
+4. Click **Set up with Cloud Build** (or Developer Connect for a supported provider), authenticate the repository provider, and select the repository.
+5. Choose the deployment branch. For **Build type**, select **Dockerfile**. Set the source location to `checkpoint-counter-app/Dockerfile`; the containing `checkpoint-counter-app` directory is the Docker build context.
+6. Return to the service form and set a permanent service name and region. Under container settings, use container port `8080` if the field is shown. No custom `PORT` value is required because Cloud Run supplies it.
+7. For a public website, choose **Allow public access**. Keep authentication required if the application should remain private.
+8. Click **Create**. Follow the build/deployment status on the service details page, then open the generated HTTPS URL.
+9. Later pushes to the selected branch trigger a new Docker build and Cloud Run revision automatically.
+
+If your organization does not permit repository connections, build and push the image to Artifact Registry first, then choose **Deploy one revision from an existing container image** in the Cloud Run form.
+
 ### If the result area is empty
 
 Reload the page once. The frontend now accepts both the current API response and older responses that do not include `vqe_view`, so the staffing result remains visible during a server upgrade. If the page shows a restart message, stop the old process, run `python app.py` again, and reload. Failed runs are displayed in the result area with a **Try again** button instead of leaving an endless loading placeholder.
