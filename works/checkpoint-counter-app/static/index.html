@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#121816" />
+    <title>Checkpoint Counter Lab</title>
+    <meta name="description" content="Explore uncertainty-aware checkpoint staffing with QAE-informed expected shortfall." />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#">Checkpoint Counter <span>Lab</span></a>
+      <div class="top-actions">
+        <button class="icon-button" id="help-button" aria-label="Open method notes" title="Method notes">?</button>
+        <button class="reset-button" id="reset-button">Reset defaults</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow"><span class="pulse"></span> QAE-informed staffing</p>
+          <h1>Design a calmer checkpoint.</h1>
+          <p class="lede">Tune demand, officer skills, and risk penalties. Compare the nominal mean-case plan with an uncertainty-aware allocation.</p>
+        </div>
+        <div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </section>
+
+      <section class="workspace">
+        <aside class="control-panel">
+          <div class="panel-heading">
+            <div><p class="overline">Problem setup</p><h2>Model inputs</h2></div>
+            <span class="status-pill" id="problem-status">DEFAULT</span>
+          </div>
+          <nav class="step-nav" aria-label="Input sections">
+            <button class="active" data-tab="demand"><span>01</span> Demand</button>
+            <button data-tab="officers"><span>02</span> Officers</button>
+            <button data-tab="costs"><span>03</span> Costs &amp; risk</button>
+            <button data-tab="solver"><span>04</span> Solver</button>
+          </nav>
+
+          <div class="editor-area">
+            <section class="editor-tab active" id="tab-demand">
+              <div class="section-intro"><h3>Demand by period</h3><p>Set the nominal number of counters needed for each checkpoint type.</p></div>
+              <div id="demand-editor"></div>
+              <button class="add-button" id="add-period">+ Add period</button>
+            </section>
+            <section class="editor-tab" id="tab-officers">
+              <div class="section-intro"><h3>Officer classes</h3><p>Each class represents officers with an identical skill set.</p></div>
+              <div id="officer-editor"></div>
+              <button class="add-button" id="add-class">+ Add officer class</button>
+            </section>
+            <section class="editor-tab" id="tab-costs">
+              <div class="section-intro"><h3>Cost &amp; volatility</h3><p>CV controls demand spread; shortage penalty controls risk sensitivity.</p></div>
+              <div id="cost-editor"></div>
+            </section>
+            <section class="editor-tab" id="tab-solver">
+              <div class="section-intro"><h3>Solver controls</h3><p>Advanced settings mirror the notebook. Defaults are a good starting point.</p></div>
+              <div id="solver-editor"></div>
+              <div class="json-actions">
+                <button class="add-button" id="load-json">Import JSON</button>
+                <button class="add-button" id="export-json">Export JSON</button>
+                <input type="file" id="json-file" accept="application/json,.json" hidden />
+              </div>
+            </section>
+          </div>
+          <div class="error-box" id="input-error" role="alert" hidden></div>
+          <button class="run-button" id="run-button"><span>Run optimization</span><b>→</b></button>
+        </aside>
+
+        <section class="results" id="results" aria-live="polite">
+          <div class="results-heading">
+            <div><p class="overline">Latest run</p><h2>Decision brief</h2></div>
+            <span class="runtime" id="runtime">Preparing model…</span>
+          </div>
+          <div id="result-content" class="loading-results">
+            <div class="loading-line wide"></div><div class="loading-line"></div><div class="loading-line short"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="method-dialog">
+      <div class="dialog-head"><div><p class="overline">Method notes</p><h2>What the model is doing</h2></div><button id="close-dialog" aria-label="Close">×</button></div>
+      <div class="dialog-body">
+        <article><span>01</span><div><h3>Discrete uncertain demand</h3><p>Each demand cell becomes five scenarios centered on its nominal value. Spread is proportional to the checkpoint type's coefficient of variation.</p></div></article>
+        <article><span>02</span><div><h3>Expected shortfall</h3><p>For staffing level <em>n</em>, the risk term is <code>E[(D - n)⁺] = Σᵥ pᵥ max(v - n, 0)</code>.</p></div></article>
+        <article><span>03</span><div><h3>QAE payoff encoding</h3><p>Scenario probabilities are loaded as amplitudes. Controlled rotations place normalized shortfall on an ancilla, so its probability of 1 equals the normalized expectation. The local app evaluates this noiseless statevector amplitude analytically.</p></div></article>
+        <article><span>04</span><div><h3>QUBO surrogate &amp; staffing</h3><p>A quadratic fit <code>âL(n) = a₂n² + a₁n + a₀</code> makes the risk curve QUBO-compatible. The app searches feasible counter counts exactly under the same surrogate, then evaluates the chosen plan on the exact loss curve.</p></div></article>
+      </div>
+      <p class="source-note">Adapted from <strong>checkpoint_counter_final.ipynb</strong> and the QAE/QMC formulation in the accompanying 2409.07183v1 paper.</p>
+    </dialog>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
