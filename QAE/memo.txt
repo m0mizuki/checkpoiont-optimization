@@ -1,0 +1,48 @@
+Part 1:
+30 officers
+4 time periods: morning, lunch, afternoon, night
+Objective is to shift officers around 
+
+Several types of counters in Checkpoint:
+Human (A)
+Motorcycle (B)
+Car (C)
+Truck (D)
+ 
+To decide how many counters to open and how to be assigned to which counter
+
+Data:
+Officers:
+23 officers have skills ['A', 'B', 'C', 'D']
+3 officers have skills ['A', 'C', 'D']
+1 officers has skills ['B', 'C', 'D']
+2 officers have skills ['A','D']
+1 officers has skills ['C','D']
+
+
+
+Demand for each zone, will change for different time periods:
+1. A: 6
+2. B: 4
+3. C: 4
+4. D: 10
+
+
+Notes on presentation:
+Start with a problem statement. Inspired by Prof Lau and Monit to implement QAE to consider the uncertainty in service center demand surge
+We can use the slides format from the Japanese generation app
+Team is familiar with optimisation problems, want to see if QUBO has any advantages
+Talk about the requirements of the problem. Demand (ie people coming) is stochastic
+There was not enough variation/complexity in the expected shortfall, so Monit suggested to increase it
+This was done by scaling the offsets by the base demand, 
+Explain flow of the pipeline we used to implement our problem → QAE used to estimate expected loss/shortfall, which is fed into a simulated annealing model
+Diagram for pipeline needed
+Short overview of QAE - 
+Show QUBO: 
+Results: compare nominal and annealed
+
+
+
+Key takeaways
+for real world use cases, can use qGAN for unknown distributions within historical data
+
