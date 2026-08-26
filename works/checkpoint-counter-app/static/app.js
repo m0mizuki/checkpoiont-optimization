@@ -69,10 +69,10 @@ function renderSolverEditor() {
   const solver = problem.solver;
   $('#solver-editor').innerHTML = `
     <div class="solver-grid">
-      <label>QAE epsilon <button class="tip" data-tip="Target amplitude-estimation precision. Smaller values imply a larger oracle-query budget.">?</button><input data-solver="epsilon_target" type="number" min="0.001" max="0.25" step="0.001" value="${solver.epsilon_target}" /></label>
-      <label>Confidence alpha <button class="tip" data-tip="Failure-probability parameter retained from the notebook's IQAE setup.">?</button><input data-solver="alpha" type="number" min="0.001" max="0.5" step="0.001" value="${solver.alpha}" /></label>
-      <label>Open-cost search weight <button class="tip" data-tip="Weight applied to open cost while searching the quadratic surrogate. Exact reporting uses the full open cost.">?</button><input data-solver="alpha_open" type="number" min="0" max="10" step="0.01" value="${solver.alpha_open}" /></label>
-      <label>One-officer penalty <button class="tip" data-tip="Notebook QUBO penalty shown for parity. This app enforces eligibility and no double-booking directly.">?</button><input data-solver="one_officer_penalty" type="number" min="0" step="1" value="${solver.one_officer_penalty}" /></label>
+      <label>QAE epsilon <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain QAE epsilon">?</button><span class="field-popover" hidden>Target amplitude-estimation precision. Smaller values imply a larger oracle-query budget.</span></span><input data-solver="epsilon_target" type="number" min="0.001" max="0.25" step="0.001" value="${solver.epsilon_target}" /></label>
+      <label>Confidence alpha <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain confidence alpha">?</button><span class="field-popover" hidden>Failure-probability parameter retained from the notebook's IQAE setup.</span></span><input data-solver="alpha" type="number" min="0.001" max="0.5" step="0.001" value="${solver.alpha}" /></label>
+      <label>Open-cost search weight <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain open-cost search weight">?</button><span class="field-popover" hidden>Weight applied while searching the quadratic surrogate. Final reporting uses the full open cost.</span></span><input data-solver="alpha_open" type="number" min="0" max="10" step="0.01" value="${solver.alpha_open}" /></label>
+      <label>One-officer penalty <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain one-officer penalty">?</button><span class="field-popover" hidden>Notebook QUBO penalty shown for parity. This app enforces eligibility and no double-booking directly.</span></span><input data-solver="one_officer_penalty" type="number" min="0" step="1" value="${solver.one_officer_penalty}" /></label>
       <label>Random seed<input data-solver="seed" type="number" min="0" step="1" value="${solver.seed}" /></label>
     </div>
     <div class="probability-editor"><p>Five-scenario probabilities</p><div>${problem.probabilities.map((value, index) => `<label>p${index + 1}<input data-probability="${index}" type="number" min="0" max="1" step="0.05" value="${value}" /></label>`).join('')}</div><small>Must sum to 1. The default is 0.1 / 0.2 / 0.4 / 0.2 / 0.1.</small></div>`;
@@ -112,18 +112,33 @@ async function runModel() {
   button.classList.add('running');
   button.querySelector('span').textContent = 'Solving model…';
   $('#runtime').textContent = 'Computing…';
+  if (!lastResult) {
+    $('#result-content').className = 'solve-progress';
+    $('#result-content').innerHTML = '<div class="spinner" aria-hidden="true"></div><strong>Building the staffing plan…</strong><span>This usually takes a few seconds.</span>';
+  }
   try {
     const response = await fetch('/api/solve', {
       method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(collectProblem()),
     });
-    const payload = await response.json();
+    const rawResponse = await response.text();
+    let payload;
+    try {
+      payload = JSON.parse(rawResponse);
+    } catch {
+      throw new Error(`The server returned an unreadable response (HTTP ${response.status}). Restart app.py and reload this page.`);
+    }
     if (!response.ok) throw new Error(payload.error || 'The model could not be solved.');
+    if (!payload.summary || !Array.isArray(payload.period_results)) {
+      throw new Error('The server response is missing optimization results. Restart app.py and try again.');
+    }
     lastResult = payload;
     renderResults(payload);
   } catch (caught) {
-    error.textContent = caught.message;
+    const message = caught instanceof Error ? caught.message : 'The model could not be solved.';
+    error.textContent = message;
     error.hidden = false;
-    $('#runtime').textContent = 'Input needs attention';
+    $('#runtime').textContent = 'Run failed';
+    renderRunError(message);
   } finally {
     button.disabled = false;
     button.classList.remove('running');
@@ -131,8 +146,31 @@ async function runModel() {
   }
 }
 
+function renderRunError(message) {
+  $('#result-content').className = '';
+  $('#result-content').innerHTML = `
+    <article class="run-error-card" role="alert">
+      <span>!</span>
+      <div><p class="overline">No result yet</p><h3>Optimization could not finish</h3><p>${escapeHtml(message)}</p><button id="retry-run" type="button">Try again</button></div>
+    </article>`;
+  $('#retry-run').addEventListener('click', runModel);
+}
+
+function normalizeVqeView(result) {
+  if (result.vqe_view) return result.vqe_view;
+  return {
+    executed: false,
+    status: 'VQE metadata unavailable',
+    logical_qubits: null,
+    hamiltonian_terms: null,
+    reference_exact_loss: result.summary.optimized.total,
+    explanation: 'This result came from an older running server. The staffing output is valid, but restart app.py to see problem-specific VQE mapping counts.',
+  };
+}
+
 function renderResults(result) {
   const summary = result.summary;
+  const vqe = normalizeVqeView(result);
   const direction = summary.reduction >= 0 ? 'cuts' : 'increases';
   const accentClass = summary.reduction >= 0 ? '' : 'negative';
   $('#runtime').textContent = `${number(summary.runtime_ms, 0)} ms · ${summary.total_officers} officers`;
@@ -144,7 +182,8 @@ function renderResults(result) {
     }).join('')}<td>${period.idle_officers}</td></tr>`).join('');
   const qaeRows = result.period_results.map((period) => `
     <tr><th>${escapeHtml(period.period)}</th>${period.cells.map((cell) => `<td><strong>${number(cell.qae.estimate, 2)}</strong><small>${cell.qae.confidence_interval.map((v) => number(v, 2)).join('–')}</small></td>`).join('')}</tr>`).join('');
-  const warningHtml = result.warnings.length ? `<div class="warning-stack">${result.warnings.map((item) => `<p>${escapeHtml(item)}</p>`).join('')}</div>` : '';
+  const warnings = Array.isArray(result.warnings) ? result.warnings : [];
+  const warningHtml = warnings.length ? `<div class="warning-stack">${warnings.map((item) => `<p>${escapeHtml(item)}</p>`).join('')}</div>` : '';
 
   $('#result-content').className = '';
   $('#result-content').innerHTML = `
@@ -160,10 +199,34 @@ function renderResults(result) {
       <article><p>Roster utilization</p><strong>${summary.optimized_assignments}</strong><span>officer-period assignments</span></article>
     </div>
     <article class="comparison-card">
-      <div class="card-title"><div><p class="overline">Cost composition</p><h3>Nominal vs optimized</h3></div><button class="text-button" data-open-method>How it works ↗</button></div>
+      <div class="card-title"><div><p class="overline">Cost composition</p><h3>Nominal vs optimized</h3></div><button class="text-button" data-scroll-vqe>VQE guide ↓</button></div>
       ${costBar('Nominal', summary.nominal, maxTotal)}
       ${costBar('Optimized', summary.optimized, maxTotal)}
       <div class="legend"><span><i></i> Open cost</span><span><b></b> Expected shortfall</span></div>
+    </article>
+    <article class="vqe-card" id="vqe-panel">
+      <div class="vqe-heading">
+        <div><span class="vqe-label">VQE VIEW</span><h3>Turn the staffing QUBO into low energy</h3><p>${escapeHtml(vqe.explanation)}</p></div>
+        <span class="not-run-badge">${vqe.logical_qubits == null ? 'RESTART SERVER FOR SCALE' : 'EXPLAINER · NOT RUN'}</span>
+      </div>
+      <div class="vqe-feature-chips"><span>🔁 Hybrid quantum–classical loop</span><span>📏 Measurement-based energy</span><span>🎯 Approximate candidate bitstrings</span></div>
+      <div class="vqe-flow" aria-label="VQE optimization loop">
+        <article><b>1</b><div><strong>Ansatz</strong><span>Prepare |ψ(θ)〉</span></div></article><i>→</i>
+        <article><b>2</b><div><strong>Measure</strong><span>Estimate 〈H〉</span></div></article><i>→</i>
+        <article><b>3</b><div><strong>Update</strong><span>Tune θ classically</span></div></article><i>↻</i>
+        <article><b>4</b><div><strong>Sample</strong><span>Read bitstrings</span></div></article>
+      </div>
+      <div class="vqe-output">
+        <div class="vqe-scale">
+          <p class="overline">This problem as a direct Ising model</p>
+          <div><article><strong>${vqe.logical_qubits == null ? '—' : vqe.logical_qubits.toLocaleString()}</strong><span>logical qubits</span></article><article><strong>${vqe.hamiltonian_terms == null ? '—' : vqe.hamiltonian_terms.toLocaleString()}</strong><span>Hamiltonian terms</span></article><article><strong>${number(vqe.reference_exact_loss)}</strong><span>exact reference loss</span></article></div>
+        </div>
+        <div class="trace-card">
+          <div><p class="overline">Characteristic VQE output</p><strong>Energy should trend down</strong><span>Illustrative convergence trace</span></div>
+          <div class="trace-demo" aria-label="Illustrative descending VQE energy trace"><i style="height:88%"></i><i style="height:72%"></i><i style="height:60%"></i><i style="height:51%"></i><i style="height:46%"></i><i style="height:43%"></i></div>
+        </div>
+      </div>
+      <p class="vqe-honesty"><b>Why no VQE number here?</b> The current backend gives a stable exact feasible reference. A real VQE result would depend on the ansatz, optimizer, shot count, and hardware noise, so this panel labels the mapping without inventing a quantum run.</p>
     </article>
     <article class="plan-card">
       <div class="card-title"><div><p class="overline">Staffing decision</p><h3>Counters to open</h3></div><span class="table-hint">nominal → optimized</span></div>
@@ -177,7 +240,7 @@ function renderResults(result) {
       <summary><div><p class="overline">Eligibility</p><h3>Skill capacity &amp; decoded assignments</h3></div><span>View roster</span></summary>
       <div class="detail-content"><div class="capacity-grid">${result.skill_totals.map((skill) => `<article><span>${skill.key}</span><div><strong>${skill.qualified_officers}</strong><small>${escapeHtml(skill.label)}-qualified</small></div></article>`).join('')}</div>${assignmentMarkup(result)}</div>
     </details>`;
-  document.querySelectorAll('[data-open-method]').forEach((button) => button.addEventListener('click', openMethod));
+  document.querySelectorAll('[data-scroll-vqe]').forEach((button) => button.addEventListener('click', () => $('#vqe-panel').scrollIntoView({behavior: 'smooth', block: 'center'})));
 }
 
 function costBar(label, score, maxTotal) {
@@ -220,7 +283,21 @@ function addClass() {
   markDefault(false);
 }
 
-function openMethod() { $('#method-dialog').showModal(); }
+function closeAllPopovers(except = null) {
+  document.querySelectorAll('.help-popover, .field-popover').forEach((popover) => {
+    if (popover !== except) popover.hidden = true;
+  });
+  if (except !== $('#method-popover')) $('#help-button').setAttribute('aria-expanded', 'false');
+}
+
+function toggleMainHelp(event) {
+  event.stopPropagation();
+  const popover = $('#method-popover');
+  const willOpen = popover.hidden;
+  closeAllPopovers(popover);
+  popover.hidden = !willOpen;
+  $('#help-button').setAttribute('aria-expanded', String(willOpen));
+}
 
 document.addEventListener('click', (event) => {
   const tab = event.target.closest('[data-tab]');
@@ -242,8 +319,16 @@ document.addEventListener('click', (event) => {
       renderOfficerEditor(); markDefault(false);
     }
   }
-  const tip = event.target.closest('[data-tip]');
-  if (tip) window.alert(tip.dataset.tip);
+  const tipButton = event.target.closest('.tip');
+  if (tipButton) {
+    event.stopPropagation();
+    const popover = tipButton.nextElementSibling;
+    const willOpen = popover.hidden;
+    closeAllPopovers(popover);
+    popover.hidden = !willOpen;
+  } else if (!event.target.closest('.help-popover, .help-wrap, .field-popover')) {
+    closeAllPopovers();
+  }
 });
 
 document.addEventListener('input', (event) => {
@@ -254,9 +339,8 @@ $('#run-button').addEventListener('click', runModel);
 $('#reset-button').addEventListener('click', loadDefaults);
 $('#add-period').addEventListener('click', addPeriod);
 $('#add-class').addEventListener('click', addClass);
-$('#help-button').addEventListener('click', openMethod);
-$('#close-dialog').addEventListener('click', () => $('#method-dialog').close());
-$('#method-dialog').addEventListener('click', (event) => { if (event.target === $('#method-dialog')) $('#method-dialog').close(); });
+$('#help-button').addEventListener('click', toggleMainHelp);
+$('#close-help').addEventListener('click', (event) => { event.stopPropagation(); closeAllPopovers(); });
 $('#load-json').addEventListener('click', () => $('#json-file').click());
 $('#json-file').addEventListener('change', async (event) => {
   try {

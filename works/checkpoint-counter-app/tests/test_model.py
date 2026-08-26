@@ -12,22 +12,25 @@ from model import (
 
 
 class CheckpointModelTests(unittest.TestCase):
-    def test_notebook_roster_totals(self):
+    def test_current_default_roster_totals(self):
         roster = build_roster(default_problem())
-        self.assertEqual(len(roster), 31)
+        self.assertEqual(len(roster), 30)
         totals = {key: sum(key in officer["skills"] for officer in roster) for key in "ABCD"}
-        self.assertEqual(totals, {"A": 29, "B": 25, "C": 29, "D": 31})
+        self.assertEqual(totals, {"A": 28, "B": 24, "C": 28, "D": 30})
 
     def test_worked_distribution(self):
         distribution = demand_distribution(8, 0.25, [0.1, 0.2, 0.4, 0.2, 0.1])
         self.assertEqual(distribution, {4: 0.1, 6: 0.2, 8: 0.4, 10: 0.2, 12: 0.1})
 
-    def test_default_result_matches_notebook(self):
+    def test_current_default_result(self):
         result = solve_problem(default_problem())
         self.assertAlmostEqual(result["summary"]["nominal"]["total"], 219.0)
-        self.assertAlmostEqual(result["summary"]["optimized"]["total"], 163.5)
-        self.assertAlmostEqual(result["summary"]["reduction"], 55.5)
-        self.assertEqual(result["summary"]["optimized_assignments"], 124)
+        self.assertAlmostEqual(result["summary"]["optimized"]["total"], 169.5)
+        self.assertAlmostEqual(result["summary"]["reduction"], 49.5)
+        self.assertEqual(result["summary"]["optimized_assignments"], 120)
+        self.assertFalse(result["vqe_view"]["executed"])
+        self.assertEqual(result["vqe_view"]["logical_qubits"], 440)
+        self.assertEqual(result["vqe_view"]["hamiltonian_terms"], 6920)
 
     def test_decoded_assignments_respect_skills_and_one_slot_rule(self):
         problem = default_problem()

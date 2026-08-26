@@ -4,7 +4,7 @@ Checkpoint Counter Lab is a local browser application for exploring uncertainty-
 
 The default problem exactly preserves the notebook's current data:
 
-- 31 officers in five skill classes
+- 30 officers in five skill classes (the current local default uses 23 Class 1 officers)
 - four checkpoint types: Human (A), Motorcycle (B), Car (C), and Truck (D)
 - Morning, Lunch, Afternoon, and Night demand
 - five-point stochastic demand with skill-specific coefficients of variation
@@ -15,9 +15,9 @@ With those defaults, the application reproduces the notebook's expected-loss com
 | Plan | Open cost | Expected shortfall cost | Total |
 | --- | ---: | ---: | ---: |
 | Nominal mean-case | 97.00 | 122.00 | **219.00** |
-| Optimized | 124.00 | 39.50 | **163.50** |
+| Optimized | 120.00 | 49.50 | **169.50** |
 
-That is a **55.50-unit (25.3%) reduction** in total expected loss.
+That is a **49.50-unit (22.6%) reduction** in total expected loss.
 
 ## What you can change
 
@@ -31,7 +31,7 @@ The left-side editor supports:
 - QAE epsilon/alpha and QUBO-related search settings;
 - importing or exporting the complete problem as JSON.
 
-The results emphasize the loss comparison, recommended counter counts, exact cost breakdown, QAE shortfall checks, skill capacity, and decoded officer assignments. Short explanations are kept in the `?` method dialog and expandable result sections so they do not dominate normal use.
+The results emphasize the loss comparison, recommended counter counts, exact cost breakdown, QAE shortfall checks, a clearly labeled VQE view, skill capacity, and decoded officer assignments. Short explanations use in-page speech bubbles and expandable result sections, so no browser alert or modal dialog interrupts normal use.
 
 ## Run locally
 
@@ -52,6 +52,10 @@ python app.py
 Open [http://127.0.0.1:8765](http://127.0.0.1:8765) in a browser. The server binds to localhost only.
 
 If Python is already configured with NumPy, `python app.py` is sufficient.
+
+### If the result area is empty
+
+Reload the page once. The frontend now accepts both the current API response and older responses that do not include `vqe_view`, so the staffing result remains visible during a server upgrade. If the page shows a restart message, stop the old process, run `python app.py` again, and reload. Failed runs are displayed in the result area with a **Try again** button instead of leaving an endless loading placeholder.
 
 ## Model details
 
@@ -90,6 +94,18 @@ The application searches all reachable counter-count combinations under officer 
 
 The `one_officer_penalty` setting is retained and reported for notebook/JSON parity. Direct feasibility enforcement makes it unnecessary in the local solver.
 
+### VQE view
+
+The result page also explains how the same QUBO could be handled by a Variational Quantum Eigensolver:
+
+1. map binary staffing variables to an Ising Hamiltonian;
+2. prepare a parameterized ansatz state;
+3. estimate the Hamiltonian expectation value through measurements;
+4. update the circuit parameters with a classical optimizer;
+5. sample low-energy bitstrings and check staffing feasibility.
+
+The panel reports the direct-mapping scale (logical qubits and Hamiltonian terms), the exact reference loss, and the characteristic VQE outputs: an energy-convergence trace and candidate bitstrings. It is deliberately labeled **VQE not executed**. The backend does not fabricate a VQE result; a real value would depend on the ansatz, optimizer, shot count, and hardware noise.
+
 ## API
 
 - `GET /api/health` - server status
@@ -104,7 +120,7 @@ Invalid input returns HTTP 400 with an English error message.
 python -m unittest discover -s tests -v
 ```
 
-The test suite checks the notebook roster totals, worked stochastic distribution, default 219.00/163.50 result, decoded assignment eligibility, custom-cost behavior, and validation errors.
+The test suite checks the current default roster totals, worked stochastic distribution, default 219.00/169.50 result, decoded assignment eligibility, VQE mapping scale, custom-cost behavior, and validation errors.
 
 ## Project layout
 

@@ -433,6 +433,20 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
             "optimized_counters": sum(optimized_counts[(period, key)] for period in problem["periods"]),
         })
 
+    # VQE-ready scale summary.  The local build does not pretend to execute a
+    # variational quantum circuit: these counts explain how the same QUBO would
+    # map to an Ising Hamiltonian and why a VQE run needs an ansatz, repeated
+    # measurements, and a classical parameter-update loop.
+    eligible_edges = sum(len(officer["skills"]) for officer in roster)
+    logical_qubits = eligible_edges * len(problem["periods"])
+    one_officer_couplers = len(problem["periods"]) * sum(
+        len(officer["skills"]) * (len(officer["skills"]) - 1) // 2 for officer in roster
+    )
+    shortfall_couplers = len(problem["periods"]) * sum(
+        max_counters[key] * (max_counters[key] - 1) // 2 for key in SKILL_KEYS
+    )
+    hamiltonian_terms = logical_qubits + one_officer_couplers + shortfall_couplers
+
     return {
         "summary": {
             "total_officers": len(roster),
@@ -453,6 +467,27 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
             "evaluation": "Exact discrete expected-shortfall curve",
             "one_officer_penalty": problem["solver"]["one_officer_penalty"],
             "note": "The one-officer penalty is shown for notebook parity; feasibility is enforced directly by the exact roster search.",
+        },
+        "vqe_view": {
+            "executed": False,
+            "status": "Exact reference - VQE not executed",
+            "logical_qubits": logical_qubits,
+            "hamiltonian_terms": hamiltonian_terms,
+            "linear_terms": logical_qubits,
+            "pairwise_terms": one_officer_couplers + shortfall_couplers,
+            "reference_exact_loss": optimized_score["total"],
+            "reference_surrogate_energy": sum(surrogate_scores.values()),
+            "loop": [
+                "Prepare a parameterized ansatz state",
+                "Measure the Hamiltonian expectation value",
+                "Update circuit parameters classically",
+                "Repeat, then sample the lowest-energy bitstring",
+            ],
+            "explanation": (
+                "VQE could target the Ising Hamiltonian made from this QUBO. "
+                "Its characteristic output is an energy-convergence trace and sampled bitstrings; "
+                "the local app reports a deterministic exact reference instead."
+            ),
         },
         "assignments": assignments,
     }
