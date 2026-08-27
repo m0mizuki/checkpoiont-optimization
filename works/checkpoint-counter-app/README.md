@@ -31,7 +31,7 @@ The left-side editor supports:
 - QAE epsilon/alpha, QUBO penalty, SA reads/sweeps, and random seed;
 - importing or exporting the complete problem as JSON.
 
-The results emphasize the loss comparison, recommended counter counts, exact cost breakdown, QAE shortfall checks, a clearly labeled VQE view, skill capacity, and decoded officer assignments. Short explanations use in-page speech bubbles and expandable result sections, so no browser alert or modal dialog interrupts normal use.
+The results emphasize the loss comparison, recommended counter counts, exact cost breakdown, QAE shortfall checks, SA sampling details, skill capacity, and decoded officer assignments. Short explanations use in-page speech bubbles and expandable result sections, so no browser alert or modal dialog interrupts normal use.
 
 The equation cards are typeset from TeX with pinned KaTeX 0.18.4 assets loaded from jsDelivr. If the CDN is unavailable, the same equations remain visible as readable text fallbacks.
 
@@ -84,7 +84,7 @@ If your organization does not permit repository connections, build and push the 
 
 ### If the result area is empty
 
-Reload the page once. The frontend now accepts both the current API response and older responses that do not include `vqe_view`, so the staffing result remains visible during a server upgrade. If the page shows a restart message, stop the old process, run `python app.py` again, and reload. Failed runs are displayed in the result area with a **Try again** button instead of leaving an endless loading placeholder.
+Reload the page once. If the page shows a restart message, stop the old process, run `python app.py` again, and reload. Failed runs are displayed in the result area with a **Try again** button instead of leaving an endless loading placeholder.
 
 ## Model details
 
@@ -132,18 +132,6 @@ Skill eligibility is enforced by omitting ineligible variables. The pairwise `P_
 The QUBO dictionary is converted with `dimod.BinaryQuadraticModel.from_qubo` and sampled by `dwave.samplers.SimulatedAnnealingSampler`. Defaults match the notebook: 200 reads, 400 sweeps, and seed 7. The lowest-energy sample is decoded and checked for double-booking; if it is infeasible, the API asks for a larger penalty or sampling budget. Because SA is heuristic, the result is the best sampled plan, not a proof of the global optimum. The final comparison is evaluated against the exact discrete shortfall curve, just like the notebook's final validation.
 
 The editable `one_officer_penalty` is therefore active in the app's QUBO, not merely retained as notebook metadata.
-
-### VQE view
-
-The result page also explains how the same QUBO could be handled by a Variational Quantum Eigensolver:
-
-1. map binary staffing variables to an Ising Hamiltonian;
-2. prepare a parameterized ansatz state;
-3. estimate the Hamiltonian expectation value through measurements;
-4. update the circuit parameters with a classical optimizer;
-5. sample low-energy bitstrings and check staffing feasibility.
-
-The panel reports the direct-mapping scale (logical qubits and Hamiltonian terms), the exact evaluation of the SA plan, and the characteristic VQE outputs: an energy-convergence trace and candidate bitstrings. It is deliberately labeled **VQE not executed**. The backend does not fabricate a VQE result; a real value would depend on the ansatz, optimizer, shot count, and hardware noise.
 
 ## API
 

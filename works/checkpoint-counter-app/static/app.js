@@ -170,22 +170,9 @@ function renderRunError(message) {
   $('#retry-run').addEventListener('click', runModel);
 }
 
-function normalizeVqeView(result) {
-  if (result.vqe_view) return result.vqe_view;
-  return {
-    executed: false,
-    status: 'VQE metadata unavailable',
-    logical_qubits: null,
-    hamiltonian_terms: null,
-    reference_exact_loss: result.summary.optimized.total,
-    explanation: 'This result came from an older running server. The staffing output is valid, but restart app.py to see problem-specific VQE mapping counts.',
-  };
-}
-
 function renderResults(result) {
   const summary = result.summary;
-  const vqe = normalizeVqeView(result);
-  const sa = result.sa || {sampler: 'Unavailable — restart the server', num_reads: 0, num_sweeps: 0, best_energy: 0, variables: vqe.logical_qubits, interactions: null};
+  const sa = result.sa || {sampler: 'Unavailable — restart the server', num_reads: 0, num_sweeps: 0, best_energy: 0, variables: null, interactions: null};
   const direction = summary.reduction >= 0 ? 'cuts' : 'increases';
   const accentClass = summary.reduction >= 0 ? '' : 'negative';
   $('#runtime').textContent = `${number(summary.runtime_ms, 0)} ms · ${summary.total_officers} officers`;
@@ -223,7 +210,7 @@ function renderResults(result) {
       </div>
     </article>
     <article class="comparison-card">
-      <div class="card-title"><div><p class="overline">Cost composition</p><h3>Nominal vs optimized</h3></div><button class="text-button" data-scroll-vqe>VQE guide ↓</button></div>
+      <div class="card-title"><div><p class="overline">Cost composition</p><h3>Nominal vs optimized</h3></div></div>
       ${costBar('Nominal', summary.nominal, maxTotal)}
       ${costBar('Optimized', summary.optimized, maxTotal)}
       <div class="legend"><span><i></i> Open cost</span><span><b></b> Expected shortfall</span></div>
@@ -235,30 +222,6 @@ function renderResults(result) {
         <section><span>2 · Quadratic approximation</span><div class="math-display" data-tex="\\widehat{L}_{s,t}(n)=a_{2,s,t}n^2+a_{1,s,t}n+a_{0,s,t}">L̂ₛ,ₜ(n) = a₂,ₛ,ₜn² + a₁,ₛ,ₜn + a₀,ₛ,ₜ</div><p>The exact shortfall curve is fitted by a parabola so it can be represented using linear and pairwise binary-variable terms.</p></section>
         <section><span>3 · QUBO objective</span><div class="math-display math-display-wide" data-tex="\\begin{aligned}H_{\\mathrm{QUBO}} &amp;= \\alpha\\sum_{o,s,t}c_sx_{o,s,t} \\\\ &amp;\\quad +P_{\\mathrm{one}}\\sum_{o,t}\\sum_{s&lt;s'}x_{o,s,t}x_{o,s',t} \\\\ &amp;\\quad +\\sum_{s,t}p_s\\,\\widehat{L}_{s,t}\\!\\left(\\sum_o x_{o,s,t}\\right)\\end{aligned}">H_QUBO = opening cost + one-officer penalty + expected shortfall</div><p><em>x</em> is 1 when an eligible officer staffs a counter. The three terms score opening cost, penalize double-booking, and approximate expected shortage cost. SA samples low-energy bitstrings.</p></section>
       </div>
-    </article>
-    <article class="vqe-card" id="vqe-panel">
-      <div class="vqe-heading">
-        <div><span class="vqe-label">VQE VIEW</span><h3>Turn the staffing QUBO into low energy</h3><p>${escapeHtml(vqe.explanation)}</p></div>
-        <span class="not-run-badge">${vqe.logical_qubits == null ? 'RESTART SERVER FOR SCALE' : 'EXPLAINER · NOT RUN'}</span>
-      </div>
-      <div class="vqe-feature-chips"><span>🔁 Hybrid quantum–classical loop</span><span>📏 Measurement-based energy</span><span>🎯 Approximate candidate bitstrings</span></div>
-      <div class="vqe-flow" aria-label="VQE optimization loop">
-        <article><b>1</b><div><strong>Ansatz</strong><span>Prepare |ψ(θ)〉</span></div></article><i>→</i>
-        <article><b>2</b><div><strong>Measure</strong><span>Estimate 〈H〉</span></div></article><i>→</i>
-        <article><b>3</b><div><strong>Update</strong><span>Tune θ classically</span></div></article><i>↻</i>
-        <article><b>4</b><div><strong>Sample</strong><span>Read bitstrings</span></div></article>
-      </div>
-      <div class="vqe-output">
-        <div class="vqe-scale">
-          <p class="overline">This problem as a direct Ising model</p>
-          <div><article><strong>${vqe.logical_qubits == null ? '—' : vqe.logical_qubits.toLocaleString()}</strong><span>logical qubits</span></article><article><strong>${vqe.hamiltonian_terms == null ? '—' : vqe.hamiltonian_terms.toLocaleString()}</strong><span>Hamiltonian terms</span></article><article><strong>${number(vqe.reference_exact_loss)}</strong><span>exact-evaluated SA loss</span></article></div>
-        </div>
-        <div class="trace-card">
-          <div><p class="overline">Characteristic VQE output</p><strong>Energy should trend down</strong><span>Illustrative convergence trace</span></div>
-          <div class="trace-demo" aria-label="Illustrative descending VQE energy trace"><i style="height:88%"></i><i style="height:72%"></i><i style="height:60%"></i><i style="height:51%"></i><i style="height:46%"></i><i style="height:43%"></i></div>
-        </div>
-      </div>
-      <p class="vqe-honesty"><b>Why no VQE number here?</b> The current backend samples this QUBO with classical simulated annealing. A real VQE result would depend on the ansatz, optimizer, shot count, and hardware noise, so this panel labels the optional mapping without inventing a quantum run.</p>
     </article>
     <article class="plan-card">
       <div class="card-title"><div><p class="overline">Staffing decision</p><h3>Counters to open</h3></div><span class="table-hint">nominal → optimized</span></div>
@@ -273,7 +236,6 @@ function renderResults(result) {
       <div class="detail-content"><div class="capacity-grid">${result.skill_totals.map((skill) => `<article><span>${skill.key}</span><div><strong>${skill.qualified_officers}</strong><small>${escapeHtml(skill.label)}-qualified</small></div></article>`).join('')}</div>${assignmentMarkup(result)}</div>
     </details>`;
   renderMath($('#result-content'));
-  document.querySelectorAll('[data-scroll-vqe]').forEach((button) => button.addEventListener('click', () => $('#vqe-panel').scrollIntoView({behavior: 'smooth', block: 'center'})));
 }
 
 function costBar(label, score, maxTotal) {

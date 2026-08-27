@@ -511,10 +511,8 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
             "optimized_counters": sum(optimized_counts[(period, key)] for period in problem["periods"]),
         })
 
-    # The sampled BQM is also the direct Ising/VQE mapping shown in the UI.
-    logical_qubits = bqm.num_variables
-    pairwise_terms = bqm.num_interactions
-    hamiltonian_terms = logical_qubits + pairwise_terms
+    qubo_variables = bqm.num_variables
+    qubo_interactions = bqm.num_interactions
 
     return {
         "summary": {
@@ -544,31 +542,9 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
             "num_sweeps": problem["solver"]["num_sweeps"],
             "seed": problem["solver"]["seed"],
             "best_energy": float(best.energy),
-            "variables": logical_qubits,
-            "interactions": pairwise_terms,
+            "variables": qubo_variables,
+            "interactions": qubo_interactions,
             "feasible": True,
-        },
-        "vqe_view": {
-            "executed": False,
-            "status": "SA sampled - VQE not executed",
-            "logical_qubits": logical_qubits,
-            "hamiltonian_terms": hamiltonian_terms,
-            "linear_terms": logical_qubits,
-            "pairwise_terms": pairwise_terms,
-            "reference_exact_loss": optimized_score["total"],
-            "reference_surrogate_energy": sum(surrogate_scores.values()),
-            "loop": [
-                "Prepare a parameterized ansatz state",
-                "Measure the Hamiltonian expectation value",
-                "Update circuit parameters classically",
-                "Repeat, then sample the lowest-energy bitstring",
-            ],
-            "explanation": (
-                "The staffing result was sampled classically with simulated annealing. "
-                "VQE could target the Ising Hamiltonian made from the same QUBO. "
-                "Its characteristic output is an energy-convergence trace and sampled bitstrings; "
-                "this app does not execute a variational quantum circuit."
-            ),
         },
         "assignments": assignments,
     }

@@ -1,0 +1,1519 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/mbzaou",
+    "id": "mbzaou",
+    "slide": 1,
+    "layoutId": "9e9e09e1-32fd-4d54-ac4b-38caed6384a6",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "72cf381a-6861-4f7d-ae5f-2fe54bc4f1b1",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "9e9e09e1-32fd-4d54-ac4b-38caed6384a6",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "72cf381a-6861-4f7d-ae5f-2fe54bc4f1b1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "72cf381a-6861-4f7d-ae5f-2fe54bc4f1b1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knapc7q5",
+      "id": "1",
+      "bbox": [
+        4,
+        4,
+        1272,
+        712
+      ],
+      "geometry": "rect",
+      "lineColor": "#C9CED8",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zmhoj29k",
+      "id": "2",
+      "name": "slide-title",
+      "bbox": [
+        72,
+        48,
+        820,
+        54
+      ],
+      "geometry": "rect",
+      "text": "Defining a Successful Strategy",
+      "textPreview": "Defining a Successful Strategy",
+      "resolvedFontSize": 39,
+      "resolvedTextStyle": {
+        "fontSize": 39,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Defining a Successful Strategy"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Defining a Successful Strategy",
+          "resolvedTextStyle": {
+            "fontSize": 39,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Defining a Successful Strategy",
+              "fontSize": 39,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yl8nax8z",
+      "id": "3",
+      "name": "slide-subtitle",
+      "bbox": [
+        74,
+        108,
+        1040,
+        30
+      ],
+      "geometry": "rect",
+      "text": "The best schedule minimizes the exact cost of opening counters and expected unmet demand.",
+      "textPreview": "The best schedule minimizes the exact cost of opening counters and expected unmet demand.",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The best schedule minimizes the exact cost of opening counters and expected unmet demand."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The best schedule minimizes the exact cost of opening counters and expected unmet demand.",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The best schedule minimizes the exact cost of opening counters and expected unmet demand.",
+              "fontSize": 17,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tsj6pcrm",
+      "id": "4",
+      "bbox": [
+        64,
+        154,
+        1152,
+        132
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#17245F",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8rapgrq1",
+      "id": "5",
+      "name": "objective-label",
+      "bbox": [
+        94,
+        172,
+        300,
+        24
+      ],
+      "geometry": "rect",
+      "text": "FINAL EVALUATION FUNCTION",
+      "textPreview": "FINAL EVALUATION FUNCTION",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#C8D0F6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "FINAL EVALUATION FUNCTION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "FINAL EVALUATION FUNCTION",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#C8D0F6",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "FINAL EVALUATION FUNCTION",
+              "fontSize": 14,
+              "color": "#C8D0F6",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/y98vip8b",
+      "id": "6",
+      "bbox": [
+        115,
+        202,
+        930,
+        48
+      ],
+      "alt": "TeX-rendered equation: evaluation-formula",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "70a93428-a01f-4aba-bdc0-c795c188c70e",
+        "contentType": "image/png",
+        "byteLength": 4621
+      }
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6ps7eh8v",
+      "id": "7",
+      "name": "formula-legend",
+      "bbox": [
+        128,
+        251,
+        930,
+        23
+      ],
+      "geometry": "rect",
+      "text": "open-counter cost                    +                    expected shortage penalty",
+      "textPreview": "open-counter cost                    +                    expected shortage penalty",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#DDE3FF",
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "open-counter cost                    +                    expected shortage penalty"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "open-counter cost                    +                    expected shortage penalty",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#DDE3FF",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "open-counter cost                    +                    expected shortage penalty",
+              "fontSize": 15,
+              "color": "#DDE3FF",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pwz6dsri",
+      "id": "8",
+      "name": "worked-example-title",
+      "bbox": [
+        72,
+        314,
+        710,
+        35
+      ],
+      "geometry": "rect",
+      "text": "Worked example — Motorcycle counter at Lunch",
+      "textPreview": "Worked example — Motorcycle counter at Lunch",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Worked example — Motorcycle counter at Lunch"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Worked example — Motorcycle counter at Lunch",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Worked example — Motorcycle counter at Lunch",
+              "fontSize": 24,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ov654nqx",
+      "id": "9",
+      "name": "worked-example-inputs",
+      "bbox": [
+        74,
+        355,
+        730,
+        44
+      ],
+      "geometry": "rect",
+      "text": "c_B = 1 per counter   •   p_B = 15 per unmet unit   •   D ∈ {2, 3, 4, 5, 6} with probabilities {0.1, 0.2, 0.4, 0.2, 0.1}",
+      "textPreview": "c_B = 1 per counter   •   p_B = 15 per unmet unit   •   D ∈ {2, 3, 4, 5, 6} with probabilities {0.1, 0.2, 0.4, 0.2, 0.1}",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "c_B = 1 per counter   •   p_B = 15 per unmet unit   •   D ∈ {2, 3, 4, 5, 6} with probabilities {0.1, 0.2, 0.4, 0.2, 0.1}"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "c_B = 1 per counter   •   p_B = 15 per unmet unit   •   D ∈ {2, 3, 4, 5, 6} with probabilities {0.1, 0.2, 0.4, 0.2, 0.1}",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "c_B = 1 per counter   •   p_B = 15 per unmet unit   •   D ∈ {2, 3, 4, 5, 6} with probabilities {0.1, 0.2, 0.4, 0.2, 0.1}",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxgzm9sv",
+      "id": "10",
+      "bbox": [
+        72,
+        410,
+        710,
+        70
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F3F5F9",
+      "lineColor": "#D8DDE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fy90fet0",
+      "id": "11",
+      "name": "n4-label",
+      "bbox": [
+        92,
+        426,
+        125,
+        25
+      ],
+      "geometry": "rect",
+      "text": "Open n = 4",
+      "textPreview": "Open n = 4",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Open n = 4"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Open n = 4",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Open n = 4",
+              "fontSize": 18,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/3y10rm18",
+      "id": "12",
+      "bbox": [
+        224,
+        423,
+        540,
+        29
+      ],
+      "alt": "TeX-rendered equation: n4-equation",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "5a395874-9caa-4bd7-bf5b-411e1131e49d",
+        "contentType": "image/png",
+        "byteLength": 4215
+      }
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h0rihob6",
+      "id": "13",
+      "name": "n4-note",
+      "bbox": [
+        224,
+        453,
+        430,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Only demand outcomes 5 and 6 create a shortage.",
+      "textPreview": "Only demand outcomes 5 and 6 create a shortage.",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Only demand outcomes 5 and 6 create a shortage."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Only demand outcomes 5 and 6 create a shortage.",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Only demand outcomes 5 and 6 create a shortage.",
+              "fontSize": 13,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2l0zqtsr",
+      "id": "14",
+      "bbox": [
+        72,
+        493,
+        710,
+        70
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E9EDFA",
+      "lineColor": "#BFC9EA",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3m90jytc",
+      "id": "15",
+      "name": "n5-label",
+      "bbox": [
+        92,
+        509,
+        125,
+        25
+      ],
+      "geometry": "rect",
+      "text": "Open n = 5",
+      "textPreview": "Open n = 5",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Open n = 5"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Open n = 5",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Open n = 5",
+              "fontSize": 18,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/b210v614",
+      "id": "16",
+      "bbox": [
+        224,
+        506,
+        540,
+        29
+      ],
+      "alt": "TeX-rendered equation: n5-equation",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "9a038c91-d0f2-4a07-98a4-09c3e8f3a367",
+        "contentType": "image/png",
+        "byteLength": 3698
+      }
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/porilobi",
+      "id": "17",
+      "name": "n5-note",
+      "bbox": [
+        224,
+        536,
+        430,
+        18
+      ],
+      "geometry": "rect",
+      "text": "One extra counter lowers expected cost by 3.5.",
+      "textPreview": "One extra counter lowers expected cost by 3.5.",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#17705B",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "One extra counter lowers expected cost by 3.5."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "One extra counter lowers expected cost by 3.5.",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#17705B",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "One extra counter lowers expected cost by 3.5.",
+              "fontSize": 13,
+              "color": "#17705B",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpkzuts3",
+      "id": "18",
+      "bbox": [
+        826,
+        318,
+        1,
+        244
+      ],
+      "geometry": "line",
+      "lineColor": "#D8DDE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqt0nyt8",
+      "id": "19",
+      "name": "impact-title",
+      "bbox": [
+        866,
+        314,
+        310,
+        35
+      ],
+      "geometry": "rect",
+      "text": "Full-plan impact",
+      "textPreview": "Full-plan impact",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Full-plan impact"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Full-plan impact",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Full-plan impact",
+              "fontSize": 24,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nutgby9g",
+      "id": "20",
+      "name": "impact-value",
+      "bbox": [
+        866,
+        365,
+        310,
+        54
+      ],
+      "geometry": "rect",
+      "text": "219.0  →  169.5",
+      "textPreview": "219.0  →  169.5",
+      "resolvedFontSize": 38,
+      "resolvedTextStyle": {
+        "fontSize": 38,
+        "typeface": "+mn-lt",
+        "color": "#17245F",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "219.0  →  169.5"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "219.0  →  169.5",
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "color": "#17245F",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "219.0  →  169.5",
+              "fontSize": 38,
+              "color": "#17245F",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mtkzit8v",
+      "id": "21",
+      "name": "impact-delta",
+      "bbox": [
+        866,
+        422,
+        310,
+        28
+      ],
+      "geometry": "rect",
+      "text": "−49.5 expected cost  (−22.6%)",
+      "textPreview": "−49.5 expected cost  (−22.6%)",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#17705B",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "−49.5 expected cost  (−22.6%)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "−49.5 expected cost  (−22.6%)",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#17705B",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "−49.5 expected cost  (−22.6%)",
+              "fontSize": 18,
+              "color": "#17705B",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9wbyd87m",
+      "id": "22",
+      "bbox": [
+        890,
+        464,
+        260,
+        1
+      ],
+      "geometry": "line",
+      "lineColor": "#D8DDE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ov2hk3q1",
+      "id": "23",
+      "name": "nominal-label",
+      "bbox": [
+        882,
+        481,
+        105,
+        23
+      ],
+      "geometry": "rect",
+      "text": "Nominal",
+      "textPreview": "Nominal",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Nominal"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Nominal",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Nominal",
+              "fontSize": 15,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zqtg7y9k",
+      "id": "24",
+      "name": "nominal-breakdown",
+      "bbox": [
+        986,
+        481,
+        185,
+        23
+      ],
+      "geometry": "rect",
+      "text": "97.0 open + 122.0 risk",
+      "textPreview": "97.0 open + 122.0 risk",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "right",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "97.0 open + 122.0 risk"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "97.0 open + 122.0 risk",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "97.0 open + 122.0 risk",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "right"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkfet8z",
+      "id": "25",
+      "name": "optimized-label",
+      "bbox": [
+        882,
+        516,
+        105,
+        23
+      ],
+      "geometry": "rect",
+      "text": "Optimized",
+      "textPreview": "Optimized",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Optimized"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Optimized",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Optimized",
+              "fontSize": 15,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1sby98ra",
+      "id": "26",
+      "name": "optimized-breakdown",
+      "bbox": [
+        975,
+        516,
+        196,
+        23
+      ],
+      "geometry": "rect",
+      "text": "120.0 open + 49.5 risk",
+      "textPreview": "120.0 open + 49.5 risk",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "right",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "120.0 open + 49.5 risk"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "120.0 open + 49.5 risk",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "120.0 open + 49.5 risk",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "right"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0r2hg3q5",
+      "id": "27",
+      "bbox": [
+        64,
+        596,
+        1152,
+        72
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F3F5F9",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r29g3e98",
+      "id": "28",
+      "name": "qubo-label",
+      "bbox": [
+        86,
+        609,
+        220,
+        19
+      ],
+      "geometry": "rect",
+      "text": "SA SEARCH (QUBO SURROGATE)",
+      "textPreview": "SA SEARCH (QUBO SURROGATE)",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#17245F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SA SEARCH (QUBO SURROGATE)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SA SEARCH (QUBO SURROGATE)",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#17245F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SA SEARCH (QUBO SURROGATE)",
+              "fontSize": 12,
+              "color": "#17245F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/1g7a50v6",
+      "id": "29",
+      "bbox": [
+        294,
+        604,
+        885,
+        31
+      ],
+      "alt": "TeX-rendered equation: qubo-formula",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "4aa4d752-8527-4832-91c2-d8abb61ddf4c",
+        "contentType": "image/png",
+        "byteLength": 4900
+      }
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7yd4f6l",
+      "id": "30",
+      "name": "qubo-note",
+      "bbox": [
+        86,
+        638,
+        1085,
+        20
+      ],
+      "geometry": "rect",
+      "text": "SA finds a candidate with the quadratic surrogate; the reported 169.5 is recomputed using the exact Cₑᵥₐₗ above.",
+      "textPreview": "SA finds a candidate with the quadratic surrogate; the reported 169.5 is recomputed using the exact Cₑᵥₐₗ above.",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SA finds a candidate with the quadratic surrogate; the reported 169.5 is recomputed using the exact Cₑᵥₐₗ above."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SA finds a candidate with the quadratic surrogate; the reported 169.5 is recomputed using the exact Cₑᵥₐₗ above.",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SA finds a candidate with the quadratic surrogate; the reported 169.5 is recomputed using the exact Cₑᵥₐₗ above.",
+              "fontSize": 13,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h87edk76",
+      "id": "31",
+      "name": "page-number",
+      "bbox": [
+        1174,
+        681,
+        24,
+        16
+      ],
+      "geometry": "rect",
+      "text": "6",
+      "textPreview": "6",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#737B8E",
+        "alignment": "right",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "6"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "6",
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#737B8E",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "6",
+              "fontSize": 11,
+              "color": "#737B8E",
+              "alignment": "right"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

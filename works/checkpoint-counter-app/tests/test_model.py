@@ -35,9 +35,6 @@ class CheckpointModelTests(unittest.TestCase):
         self.assertEqual(result["sa"]["variables"], 440)
         self.assertEqual(result["sa"]["interactions"], 6480)
         self.assertTrue(result["sa"]["feasible"])
-        self.assertFalse(result["vqe_view"]["executed"])
-        self.assertEqual(result["vqe_view"]["logical_qubits"], 440)
-        self.assertEqual(result["vqe_view"]["hamiltonian_terms"], 6920)
 
     def test_seeded_sa_is_reproducible(self):
         first = solve_problem(default_problem())

@@ -7,7 +7,7 @@
     <title>Checkpoint Counter Optimization</title>
     <meta name="description" content="Explore uncertainty-aware checkpoint staffing with QAE-informed expected shortfall." />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/styles.css?v=10" />
+    <link rel="stylesheet" href="/styles.css?v=11" />
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.js" integrity="sha384-ykMNcWQhhTUb0YV9SPpPUFURHZ+tWmubkakGBP+OgNK/UXdO2gtzglWx0Rj9hnO3" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -24,7 +24,7 @@
               <article><b>2</b><div><h3>Short queues cost less</h3><p><span class="math-inline" data-tex="\mathbb{E}[(D-n)^+]=\sum_v p_v\max(v-n,0)">E[(D−n)⁺] = Σᵥ pᵥ max(v−n,0)</span> measures the average unmet demand at staffing level <em>n</em>.</p></div></article>
               <article><b>3</b><div><h3>QAE checks the expectation</h3><p>Probabilities and shortfall are encoded as amplitudes. This app evaluates the noiseless payoff amplitude analytically.</p></div></article>
               <article><b>4</b><div><h3>A quadratic curve becomes a QUBO</h3><p><span class="math-inline" data-tex="\widehat{L}(n)=a_2n^2+a_1n+a_0">L̂(n)=a₂n²+a₁n+a₀</span> approximates the exact shortfall curve. Eligible officer decisions become binary variables, with pairwise penalties preventing double-booking.</p></div></article>
-              <article><b>5</b><div><h3>SA samples low-energy plans</h3><p>The app builds the notebook's explicit QUBO and runs classical simulated annealing with configurable reads, sweeps, and seed. QA and VQE are not executed.</p></div></article>
+              <article><b>5</b><div><h3>SA samples low-energy plans</h3><p>The app builds the notebook's explicit QUBO and runs classical simulated annealing with configurable reads, sweeps, and seed.</p></div></article>
             </div>
           </aside>
         </div>
@@ -97,6 +97,6 @@
       </section>
     </main>
 
-    <script defer src="/app.js?v=8"></script>
+    <script defer src="/app.js?v=9"></script>
   </body>
 </html>

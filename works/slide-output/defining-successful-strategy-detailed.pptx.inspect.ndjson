@@ -1,0 +1,68 @@
+{"kind":"deck","id":"pr/5q5g11","name":"Deck"}
+{"kind":"layout","layoutId":"72cf381a-6861-4f7d-ae5f-2fe54bc4f1b1","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"9e9e09e1-32fd-4d54-ac4b-38caed6384a6","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/mbzaou","slide":1,"title":"Defining a Successful Strategy","textShapes":20}
+{"kind":"shape","id":"sh/knapc7q5","slide":1,"bbox":[4,4,1272,712]}
+{"kind":"textbox","id":"sh/zmhoj29k","slide":1,"name":"slide-title","text":"Defining a Successful Strategy","textPreview":"Defining a Successful Strategy","textChars":30,"textLines":1,"bbox":[72,48,820,54]}
+{"kind":"textbox","id":"sh/yl8nax8z","slide":1,"name":"slide-subtitle","text":"The best schedule minimizes the exact cost of opening counters and expected unmet demand.","textPreview":"The best schedule minimizes the exact cost of opening counters and expected unmet demand.","textChars":89,"textLines":1,"bbox":[74,108,1040,30]}
+{"kind":"shape","id":"sh/tsj6pcrm","slide":1,"bbox":[64,154,1152,132]}
+{"kind":"textbox","id":"sh/8rapgrq1","slide":1,"name":"objective-label","text":"FINAL EVALUATION FUNCTION","textPreview":"FINAL EVALUATION FUNCTION","textChars":25,"textLines":1,"bbox":[94,172,300,24]}
+{"kind":"textbox","id":"sh/6ps7eh8v","slide":1,"name":"formula-legend","text":"open-counter cost                    +                    expected shortage penalty","textPreview":"open-counter cost                    +                    expected shortage penalty","textChars":83,"textLines":1,"bbox":[128,251,930,23]}
+{"kind":"textbox","id":"sh/pwz6dsri","slide":1,"name":"worked-example-title","text":"Worked example — Motorcycle counter at Lunch","textPreview":"Worked example — Motorcycle counter at Lunch","textChars":44,"textLines":1,"bbox":[72,314,710,35]}
+{"kind":"textbox","id":"sh/ov654nqx","slide":1,"name":"worked-example-inputs","text":"c_B = 1 per counter   •   p_B = 15 per unmet unit   •   D ∈ {2, 3, 4, 5, 6} with probabilities {0.1, 0.2, 0.4, 0.2, 0.1}","textPreview":"c_B = 1 per counter   •   p_B = 15 per unmet unit   •   D ∈ {2, 3, 4, 5, 6} with probabilities {0.1, 0.2, 0.4, 0.2, 0.1}","textChars":120,"textLines":1,"bbox":[74,355,730,44]}
+{"kind":"shape","id":"sh/uxgzm9sv","slide":1,"bbox":[72,410,710,70]}
+{"kind":"textbox","id":"sh/fy90fet0","slide":1,"name":"n4-label","text":"Open n = 4","textPreview":"Open n = 4","textChars":10,"textLines":1,"bbox":[92,426,125,25]}
+{"kind":"textbox","id":"sh/h0rihob6","slide":1,"name":"n4-note","text":"Only demand outcomes 5 and 6 create a shortage.","textPreview":"Only demand outcomes 5 and 6 create a shortage.","textChars":47,"textLines":1,"bbox":[224,453,430,18]}
+{"kind":"shape","id":"sh/2l0zqtsr","slide":1,"bbox":[72,493,710,70]}
+{"kind":"textbox","id":"sh/3m90jytc","slide":1,"name":"n5-label","text":"Open n = 5","textPreview":"Open n = 5","textChars":10,"textLines":1,"bbox":[92,509,125,25]}
+{"kind":"textbox","id":"sh/porilobi","slide":1,"name":"n5-note","text":"One extra counter lowers expected cost by 3.5.","textPreview":"One extra counter lowers expected cost by 3.5.","textChars":46,"textLines":1,"bbox":[224,536,430,18]}
+{"kind":"shape","id":"sh/qpkzuts3","slide":1,"bbox":[826,318,1,244]}
+{"kind":"textbox","id":"sh/rqt0nyt8","slide":1,"name":"impact-title","text":"Full-plan impact","textPreview":"Full-plan impact","textChars":16,"textLines":1,"bbox":[866,314,310,35]}
+{"kind":"textbox","id":"sh/nutgby9g","slide":1,"name":"impact-value","text":"219.0  →  169.5","textPreview":"219.0  →  169.5","textChars":15,"textLines":1,"bbox":[866,365,310,54]}
+{"kind":"textbox","id":"sh/mtkzit8v","slide":1,"name":"impact-delta","text":"−49.5 expected cost  (−22.6%)","textPreview":"−49.5 expected cost  (−22.6%)","textChars":29,"textLines":1,"bbox":[866,422,310,28]}
+{"kind":"shape","id":"sh/9wbyd87m","slide":1,"bbox":[890,464,260,1]}
+{"kind":"textbox","id":"sh/ov2hk3q1","slide":1,"name":"nominal-label","text":"Nominal","textPreview":"Nominal","textChars":7,"textLines":1,"bbox":[882,481,105,23]}
+{"kind":"textbox","id":"sh/zqtg7y9k","slide":1,"name":"nominal-breakdown","text":"97.0 open + 122.0 risk","textPreview":"97.0 open + 122.0 risk","textChars":22,"textLines":1,"bbox":[986,481,185,23]}
+{"kind":"textbox","id":"sh/epkfet8z","slide":1,"name":"optimized-label","text":"Optimized","textPreview":"Optimized","textChars":9,"textLines":1,"bbox":[882,516,105,23]}
+{"kind":"textbox","id":"sh/1sby98ra","slide":1,"name":"optimized-breakdown","text":"120.0 open + 49.5 risk","textPreview":"120.0 open + 49.5 risk","textChars":22,"textLines":1,"bbox":[975,516,196,23]}
+{"kind":"shape","id":"sh/0r2hg3q5","slide":1,"bbox":[64,596,1152,72]}
+{"kind":"textbox","id":"sh/r29g3e98","slide":1,"name":"qubo-label","text":"SA SEARCH (QUBO SURROGATE)","textPreview":"SA SEARCH (QUBO SURROGATE)","textChars":26,"textLines":1,"bbox":[86,609,220,19]}
+{"kind":"textbox","id":"sh/g7yd4f6l","slide":1,"name":"qubo-note","text":"SA finds a candidate with the quadratic surrogate; the reported 169.5 is recomputed using the exact Cₑᵥₐₗ above.","textPreview":"SA finds a candidate with the quadratic surrogate; the reported 169.5 is recomputed using the exact Cₑᵥₐₗ above.","textChars":112,"textLines":1,"bbox":[86,638,1085,20]}
+{"kind":"textbox","id":"sh/h87edk76","slide":1,"name":"page-number","text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1174,681,24,16]}
+{"kind":"image","id":"im/y98vip8b","slide":1,"name":"","alt":"TeX-rendered equation: evaluation-formula","bbox":[115,202,930,48]}
+{"kind":"image","id":"im/3y10rm18","slide":1,"name":"","alt":"TeX-rendered equation: n4-equation","bbox":[224,423,540,29]}
+{"kind":"image","id":"im/b210v614","slide":1,"name":"","alt":"TeX-rendered equation: n5-equation","bbox":[224,506,540,29]}
+{"kind":"image","id":"im/1g7a50v6","slide":1,"name":"","alt":"TeX-rendered equation: qubo-formula","bbox":[294,604,885,31]}
+{"kind":"notes","id":"nt/mbzaou","slide":1,"text":""}
+{"kind":"slide","id":"sl/od0p4q","slide":2,"title":"How the Staffing Model Becomes a QUBO","textShapes":19}
+{"kind":"shape","id":"sh/65s3m1or","slide":2,"bbox":[4,4,1272,712]}
+{"kind":"textbox","id":"sh/tsj2xwn2","slide":2,"name":"qubo-slide-title","text":"How the Staffing Model Becomes a QUBO","textPreview":"How the Staffing Model Becomes a QUBO","textChars":37,"textLines":1,"bbox":[72,48,930,54]}
+{"kind":"textbox","id":"sh/8ralor6h","slide":2,"name":"qubo-slide-subtitle","text":"The quadratic shortfall fit creates linear and pairwise binary coefficients that simulated annealing can sample.","textPreview":"The quadratic shortfall fit creates linear and pairwise binary coefficients that simulated annealing can sample.","textChars":112,"textLines":1,"bbox":[74,108,1100,30]}
+{"kind":"shape","id":"sh/j2hkrm50","slide":2,"bbox":[64,154,1152,130]}
+{"kind":"textbox","id":"sh/y183ihof","slide":2,"name":"qubo-banner-label","text":"QUBO SEARCH OBJECTIVE","textPreview":"QUBO SEARCH OBJECTIVE","textChars":21,"textLines":1,"bbox":[94,172,280,24]}
+{"kind":"textbox","id":"sh/k3qlkr6l","slide":2,"name":"qubo-banner-legend","text":"opening cost                     +                     one-officer penalty                     +                     quadratic shortage cost","textPreview":"opening cost                     +                     one-officer penalty                     +                     quadratic shortage cost","textChars":140,"textLines":1,"bbox":[118,255,1010,21]}
+{"kind":"textbox","id":"sh/3yl43654","slide":2,"name":"qubo-worked-title","text":"Worked contribution — Motorcycle, Lunch","textPreview":"Worked contribution — Motorcycle, Lunch","textChars":39,"textLines":1,"bbox":[72,314,700,35]}
+{"kind":"textbox","id":"sh/ixc3ul4z","slide":2,"name":"qubo-step1","text":"1  Fit the exact shortfall values with a parabola","textPreview":"1  Fit the exact shortfall values with a parabola","textChars":49,"textLines":1,"bbox":[72,358,560,25]}
+{"kind":"textbox","id":"sh/4rux43md","slide":2,"name":"qubo-fit-data","text":"n             0        1        2        3        4        5        6\nExact L(n)   4.0     3.0     2.0     1.1     0.4     0.1     0.0","textPreview":"n             0        1        2        3        4        5        6 | Exact L(n)   4.0     3.0     2.0     1.1     0.4     0.1     0.0","textChars":134,"textLines":2,"bbox":[91,389,620,48]}
+{"kind":"shape","id":"sh/ipcf2t47","slide":2,"bbox":[72,486,710,1]}
+{"kind":"textbox","id":"sh/3qlgvy5s","slide":2,"name":"qubo-step2","text":"2  Substitute the binary count and use x² = x","textPreview":"2  Substitute the binary count and use x² = x","textChars":45,"textLines":1,"bbox":[72,500,560,25]}
+{"kind":"textbox","id":"sh/ho3ytonm","slide":2,"name":"qubo-constant-note","text":"The constant 61.393 shifts every energy equally, so it does not change the best bitstring.","textPreview":"The constant 61.393 shifts every energy equally, so it does not change the best bitstring.","textChars":90,"textLines":1,"bbox":[91,579,675,20]}
+{"kind":"shape","id":"sh/ulsfyt4v","slide":2,"bbox":[821,318,1,282]}
+{"kind":"textbox","id":"sh/vmlgre5g","slide":2,"name":"qubo-coeff-title","text":"Resulting coefficients","textPreview":"Resulting coefficients","textChars":22,"textLines":1,"bbox":[858,314,330,35]}
+{"kind":"textbox","id":"sh/8jaxwjm5","slide":2,"name":"qubo-linear-value","text":"−17.843","textPreview":"−17.843","textChars":7,"textLines":1,"bbox":[858,368,145,39]}
+{"kind":"textbox","id":"sh/tkjeponq","slide":2,"name":"qubo-linear-label","text":"per eligible Motorcycle\nassignment","textPreview":"per eligible Motorcycle | assignment","textChars":34,"textLines":2,"bbox":[1013,367,175,40]}
+{"kind":"shape","id":"sh/9gbet0fe","slide":2,"bbox":[858,420,330,1]}
+{"kind":"textbox","id":"sh/of2d0fyt","slide":2,"name":"qubo-pair-value","text":"+3.000","textPreview":"+3.000","textChars":6,"textLines":1,"bbox":[858,438,145,39]}
+{"kind":"textbox","id":"sh/netcrax8","slide":2,"name":"qubo-pair-label","text":"for two Motorcycle\nassignments","textPreview":"for two Motorcycle | assignments","textChars":30,"textLines":2,"bbox":[1013,437,175,40]}
+{"kind":"shape","id":"sh/mdkvy5gn","slide":2,"bbox":[858,490,330,1]}
+{"kind":"textbox","id":"sh/1cbup0f2","slide":2,"name":"qubo-penalty-value","text":"+20.000","textPreview":"+20.000","textChars":7,"textLines":1,"bbox":[858,508,145,39]}
+{"kind":"textbox","id":"sh/0r2dwvyx","slide":2,"name":"qubo-penalty-label","text":"when one officer is\ndouble-booked","textPreview":"when one officer is | double-booked","textChars":33,"textLines":2,"bbox":[1013,507,175,40]}
+{"kind":"shape","id":"sh/ep0vulgr","slide":2,"bbox":[64,620,1152,48]}
+{"kind":"textbox","id":"sh/58ve1kfm","slide":2,"name":"qubo-interpretation-label","text":"Interpretation","textPreview":"Interpretation","textChars":14,"textLines":1,"bbox":[88,634,105,18]}
+{"kind":"textbox","id":"sh/knmd8ze1","slide":2,"name":"qubo-interpretation","text":"The negative linear term rewards useful staffing; the positive pair term makes its marginal benefit diminish. SA samples the full 440-variable QUBO, then the app recomputes the exact final cost.","textPreview":"The negative linear term rewards useful staffing; the positive pair term makes its marginal benefit diminish. SA samples the full 440-var...","textChars":194,"textLines":1,"bbox":[205,630,980,28]}
+{"kind":"textbox","id":"sh/ihwj6xs7","slide":2,"name":"qubo-page-number","text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[1174,681,24,16]}
+{"kind":"image","id":"im/kbep0fi9","slide":2,"name":"","alt":"TeX-rendered equation: qubo-banner-formula","bbox":[104,201,1060,52]}
+{"kind":"image","id":"im/mpobqxcj","slide":2,"name":"","alt":"TeX-rendered equation: qubo-fit-equation","bbox":[130,437,590,39]}
+{"kind":"image","id":"im/bexs32t0","slide":2,"name":"","alt":"TeX-rendered equation: qubo-expanded-equation","bbox":[88,533,690,40]}
+{"kind":"image","id":"im/snu5kfi5","slide":2,"name":"","alt":"TeX-rendered equation: qubo-energy-equation","bbox":[850,563,350,29]}
+{"kind":"notes","id":"nt/od0p4q","slide":2,"text":""}

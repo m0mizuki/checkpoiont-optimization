@@ -1,0 +1,1546 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/od0p4q",
+    "id": "od0p4q",
+    "slide": 2,
+    "layoutId": "9e9e09e1-32fd-4d54-ac4b-38caed6384a6",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "72cf381a-6861-4f7d-ae5f-2fe54bc4f1b1",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "9e9e09e1-32fd-4d54-ac4b-38caed6384a6",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "72cf381a-6861-4f7d-ae5f-2fe54bc4f1b1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "72cf381a-6861-4f7d-ae5f-2fe54bc4f1b1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65s3m1or",
+      "id": "1",
+      "bbox": [
+        4,
+        4,
+        1272,
+        712
+      ],
+      "geometry": "rect",
+      "lineColor": "#C9CED8",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tsj2xwn2",
+      "id": "2",
+      "name": "qubo-slide-title",
+      "bbox": [
+        72,
+        48,
+        930,
+        54
+      ],
+      "geometry": "rect",
+      "text": "How the Staffing Model Becomes a QUBO",
+      "textPreview": "How the Staffing Model Becomes a QUBO",
+      "resolvedFontSize": 39,
+      "resolvedTextStyle": {
+        "fontSize": 39,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "How the Staffing Model Becomes a QUBO"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "How the Staffing Model Becomes a QUBO",
+          "resolvedTextStyle": {
+            "fontSize": 39,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "How the Staffing Model Becomes a QUBO",
+              "fontSize": 39,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8ralor6h",
+      "id": "3",
+      "name": "qubo-slide-subtitle",
+      "bbox": [
+        74,
+        108,
+        1100,
+        30
+      ],
+      "geometry": "rect",
+      "text": "The quadratic shortfall fit creates linear and pairwise binary coefficients that simulated annealing can sample.",
+      "textPreview": "The quadratic shortfall fit creates linear and pairwise binary coefficients that simulated annealing can sample.",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The quadratic shortfall fit creates linear and pairwise binary coefficients that simulated annealing can sample."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The quadratic shortfall fit creates linear and pairwise binary coefficients that simulated annealing can sample.",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The quadratic shortfall fit creates linear and pairwise binary coefficients that simulated annealing can sample.",
+              "fontSize": 17,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j2hkrm50",
+      "id": "4",
+      "bbox": [
+        64,
+        154,
+        1152,
+        130
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#17245F",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y183ihof",
+      "id": "5",
+      "name": "qubo-banner-label",
+      "bbox": [
+        94,
+        172,
+        280,
+        24
+      ],
+      "geometry": "rect",
+      "text": "QUBO SEARCH OBJECTIVE",
+      "textPreview": "QUBO SEARCH OBJECTIVE",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#C8D0F6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "QUBO SEARCH OBJECTIVE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "QUBO SEARCH OBJECTIVE",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#C8D0F6",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "QUBO SEARCH OBJECTIVE",
+              "fontSize": 14,
+              "color": "#C8D0F6",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/kbep0fi9",
+      "id": "6",
+      "bbox": [
+        104,
+        201,
+        1060,
+        52
+      ],
+      "alt": "TeX-rendered equation: qubo-banner-formula",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "e5d9c151-096e-45cc-a93e-e8b75883726d",
+        "contentType": "image/png",
+        "byteLength": 6628
+      }
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k3qlkr6l",
+      "id": "7",
+      "name": "qubo-banner-legend",
+      "bbox": [
+        118,
+        255,
+        1010,
+        21
+      ],
+      "geometry": "rect",
+      "text": "opening cost                     +                     one-officer penalty                     +                     quadratic shortage cost",
+      "textPreview": "opening cost                     +                     one-officer penalty                     +                     quadratic shortage cost",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#DDE3FF",
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "opening cost                     +                     one-officer penalty                     +                     quadratic shortage cost"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "opening cost                     +                     one-officer penalty                     +                     quadratic shortage cost",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#DDE3FF",
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "opening cost                     +                     one-officer penalty                     +                     quadratic shortage cost",
+              "fontSize": 13,
+              "color": "#DDE3FF",
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3yl43654",
+      "id": "8",
+      "name": "qubo-worked-title",
+      "bbox": [
+        72,
+        314,
+        700,
+        35
+      ],
+      "geometry": "rect",
+      "text": "Worked contribution — Motorcycle, Lunch",
+      "textPreview": "Worked contribution — Motorcycle, Lunch",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Worked contribution — Motorcycle, Lunch"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Worked contribution — Motorcycle, Lunch",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Worked contribution — Motorcycle, Lunch",
+              "fontSize": 24,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ixc3ul4z",
+      "id": "9",
+      "name": "qubo-step1",
+      "bbox": [
+        72,
+        358,
+        560,
+        25
+      ],
+      "geometry": "rect",
+      "text": "1  Fit the exact shortfall values with a parabola",
+      "textPreview": "1  Fit the exact shortfall values with a parabola",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1  Fit the exact shortfall values with a parabola"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1  Fit the exact shortfall values with a parabola",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1  Fit the exact shortfall values with a parabola",
+              "fontSize": 17,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4rux43md",
+      "id": "10",
+      "name": "qubo-fit-data",
+      "bbox": [
+        91,
+        389,
+        620,
+        48
+      ],
+      "geometry": "rect",
+      "text": "n             0        1        2        3        4        5        6\nExact L(n)   4.0     3.0     2.0     1.1     0.4     0.1     0.0",
+      "textPreview": "n             0        1        2        3        4        5        6 | Exact L(n)   4.0     3.0     2.0     1.1     0.4     0.1     0.0",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "n             0        1        2        3        4        5        6"
+          },
+          {
+            "index": 2,
+            "text": "Exact L(n)   4.0     3.0     2.0     1.1     0.4     0.1     0.0"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "n             0        1        2        3        4        5        6",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "n             0        1        2        3        4        5        6",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Exact L(n)   4.0     3.0     2.0     1.1     0.4     0.1     0.0",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Exact L(n)   4.0     3.0     2.0     1.1     0.4     0.1     0.0",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/mpobqxcj",
+      "id": "11",
+      "bbox": [
+        130,
+        437,
+        590,
+        39
+      ],
+      "alt": "TeX-rendered equation: qubo-fit-equation",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "b525a282-4f2b-4a5b-b85c-eab8287ae1f8",
+        "contentType": "image/png",
+        "byteLength": 4196
+      }
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ipcf2t47",
+      "id": "12",
+      "bbox": [
+        72,
+        486,
+        710,
+        1
+      ],
+      "geometry": "line",
+      "lineColor": "#D8DDE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3qlgvy5s",
+      "id": "13",
+      "name": "qubo-step2",
+      "bbox": [
+        72,
+        500,
+        560,
+        25
+      ],
+      "geometry": "rect",
+      "text": "2  Substitute the binary count and use x² = x",
+      "textPreview": "2  Substitute the binary count and use x² = x",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2  Substitute the binary count and use x² = x"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2  Substitute the binary count and use x² = x",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2  Substitute the binary count and use x² = x",
+              "fontSize": 17,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/bexs32t0",
+      "id": "14",
+      "bbox": [
+        88,
+        533,
+        690,
+        40
+      ],
+      "alt": "TeX-rendered equation: qubo-expanded-equation",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "d6f3ff6d-1893-4635-a63f-ebfbfb8e7e5b",
+        "contentType": "image/png",
+        "byteLength": 6370
+      }
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ho3ytonm",
+      "id": "15",
+      "name": "qubo-constant-note",
+      "bbox": [
+        91,
+        579,
+        675,
+        20
+      ],
+      "geometry": "rect",
+      "text": "The constant 61.393 shifts every energy equally, so it does not change the best bitstring.",
+      "textPreview": "The constant 61.393 shifts every energy equally, so it does not change the best bitstring.",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The constant 61.393 shifts every energy equally, so it does not change the best bitstring."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The constant 61.393 shifts every energy equally, so it does not change the best bitstring.",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The constant 61.393 shifts every energy equally, so it does not change the best bitstring.",
+              "fontSize": 14,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ulsfyt4v",
+      "id": "16",
+      "bbox": [
+        821,
+        318,
+        1,
+        282
+      ],
+      "geometry": "line",
+      "lineColor": "#D8DDE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmlgre5g",
+      "id": "17",
+      "name": "qubo-coeff-title",
+      "bbox": [
+        858,
+        314,
+        330,
+        35
+      ],
+      "geometry": "rect",
+      "text": "Resulting coefficients",
+      "textPreview": "Resulting coefficients",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#14214C",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Resulting coefficients"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Resulting coefficients",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#14214C",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Resulting coefficients",
+              "fontSize": 24,
+              "color": "#14214C",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8jaxwjm5",
+      "id": "18",
+      "name": "qubo-linear-value",
+      "bbox": [
+        858,
+        368,
+        145,
+        39
+      ],
+      "geometry": "rect",
+      "text": "−17.843",
+      "textPreview": "−17.843",
+      "resolvedFontSize": 29,
+      "resolvedTextStyle": {
+        "fontSize": 29,
+        "typeface": "+mn-lt",
+        "color": "#17245F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "−17.843"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "−17.843",
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "color": "#17245F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "−17.843",
+              "fontSize": 29,
+              "color": "#17245F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tkjeponq",
+      "id": "19",
+      "name": "qubo-linear-label",
+      "bbox": [
+        1013,
+        367,
+        175,
+        40
+      ],
+      "geometry": "rect",
+      "text": "per eligible Motorcycle\nassignment",
+      "textPreview": "per eligible Motorcycle | assignment",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "per eligible Motorcycle"
+          },
+          {
+            "index": 2,
+            "text": "assignment"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "per eligible Motorcycle",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "per eligible Motorcycle",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "assignment",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "assignment",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gbet0fe",
+      "id": "20",
+      "bbox": [
+        858,
+        420,
+        330,
+        1
+      ],
+      "geometry": "line",
+      "lineColor": "#D8DDE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/of2d0fyt",
+      "id": "21",
+      "name": "qubo-pair-value",
+      "bbox": [
+        858,
+        438,
+        145,
+        39
+      ],
+      "geometry": "rect",
+      "text": "+3.000",
+      "textPreview": "+3.000",
+      "resolvedFontSize": 29,
+      "resolvedTextStyle": {
+        "fontSize": 29,
+        "typeface": "+mn-lt",
+        "color": "#17245F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "+3.000"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "+3.000",
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "color": "#17245F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "+3.000",
+              "fontSize": 29,
+              "color": "#17245F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/netcrax8",
+      "id": "22",
+      "name": "qubo-pair-label",
+      "bbox": [
+        1013,
+        437,
+        175,
+        40
+      ],
+      "geometry": "rect",
+      "text": "for two Motorcycle\nassignments",
+      "textPreview": "for two Motorcycle | assignments",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "for two Motorcycle"
+          },
+          {
+            "index": 2,
+            "text": "assignments"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "for two Motorcycle",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "for two Motorcycle",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "assignments",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "assignments",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mdkvy5gn",
+      "id": "23",
+      "bbox": [
+        858,
+        490,
+        330,
+        1
+      ],
+      "geometry": "line",
+      "lineColor": "#D8DDE8",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cbup0f2",
+      "id": "24",
+      "name": "qubo-penalty-value",
+      "bbox": [
+        858,
+        508,
+        145,
+        39
+      ],
+      "geometry": "rect",
+      "text": "+20.000",
+      "textPreview": "+20.000",
+      "resolvedFontSize": 29,
+      "resolvedTextStyle": {
+        "fontSize": 29,
+        "typeface": "+mn-lt",
+        "color": "#A26418",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "+20.000"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "+20.000",
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "color": "#A26418",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "+20.000",
+              "fontSize": 29,
+              "color": "#A26418",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0r2dwvyx",
+      "id": "25",
+      "name": "qubo-penalty-label",
+      "bbox": [
+        1013,
+        507,
+        175,
+        40
+      ],
+      "geometry": "rect",
+      "text": "when one officer is\ndouble-booked",
+      "textPreview": "when one officer is | double-booked",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "when one officer is"
+          },
+          {
+            "index": 2,
+            "text": "double-booked"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "when one officer is",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "when one officer is",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "double-booked",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "double-booked",
+              "fontSize": 15,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/snu5kfi5",
+      "id": "26",
+      "bbox": [
+        850,
+        563,
+        350,
+        29
+      ],
+      "alt": "TeX-rendered equation: qubo-energy-equation",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "df301143-e7a5-4b0e-9eab-1002c6cbfba8",
+        "contentType": "image/png",
+        "byteLength": 4242
+      }
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ep0vulgr",
+      "id": "27",
+      "bbox": [
+        64,
+        620,
+        1152,
+        48
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F3F5F9",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/58ve1kfm",
+      "id": "28",
+      "name": "qubo-interpretation-label",
+      "bbox": [
+        88,
+        634,
+        105,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Interpretation",
+      "textPreview": "Interpretation",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#17245F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Interpretation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Interpretation",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#17245F",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Interpretation",
+              "fontSize": 13,
+              "color": "#17245F",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knmd8ze1",
+      "id": "29",
+      "name": "qubo-interpretation",
+      "bbox": [
+        205,
+        630,
+        980,
+        28
+      ],
+      "geometry": "rect",
+      "text": "The negative linear term rewards useful staffing; the positive pair term makes its marginal benefit diminish. SA samples the full 440-variable QUBO, then the app recomputes the exact final cost.",
+      "textPreview": "The negative linear term rewards useful staffing; the positive pair term makes its marginal benefit diminish. SA samples the full 440-var...",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#526078",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The negative linear term rewards useful staffing; the positive pair term makes its marginal benefit diminish. SA samples the full 440-variable QUBO, then the app"
+          },
+          {
+            "index": 2,
+            "text": "recomputes the exact final cost."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The negative linear term rewards useful staffing; the positive pair term makes its marginal benefit diminish. SA samples the full 440-variable QUBO, then the app recomputes the exact final cost.",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#526078",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The negative linear term rewards useful staffing; the positive pair term makes its marginal benefit diminish. SA samples the full 440-variable QUBO, then the app recomputes the exact final cost.",
+              "fontSize": 14,
+              "color": "#526078",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ihwj6xs7",
+      "id": "30",
+      "name": "qubo-page-number",
+      "bbox": [
+        1174,
+        681,
+        24,
+        16
+      ],
+      "geometry": "rect",
+      "text": "7",
+      "textPreview": "7",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#737B8E",
+        "alignment": "right",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "7"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "7",
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#737B8E",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "7",
+              "fontSize": 11,
+              "color": "#737B8E",
+              "alignment": "right"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
