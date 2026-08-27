@@ -7,6 +7,18 @@ const $ = (selector) => document.querySelector(selector);
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const number = (value, digits = 2) => Number(value).toLocaleString('en-US', {minimumFractionDigits: digits, maximumFractionDigits: digits});
 
+function renderMath(root = document) {
+  if (!window.katex) return;
+  root.querySelectorAll('[data-tex]:not([data-math-rendered])').forEach((element) => {
+    window.katex.render(element.dataset.tex, element, {
+      displayMode: element.classList.contains('math-display'),
+      throwOnError: false,
+      strict: false,
+    });
+    element.dataset.mathRendered = 'true';
+  });
+}
+
 async function loadDefaults() {
   const response = await fetch('/api/defaults');
   problem = await response.json();
@@ -72,7 +84,9 @@ function renderSolverEditor() {
       <label>QAE epsilon <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain QAE epsilon">?</button><span class="field-popover" hidden>Target amplitude-estimation precision. Smaller values imply a larger oracle-query budget.</span></span><input data-solver="epsilon_target" type="number" min="0.001" max="0.25" step="0.001" value="${solver.epsilon_target}" /></label>
       <label>Confidence alpha <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain confidence alpha">?</button><span class="field-popover" hidden>Failure-probability parameter retained from the notebook's IQAE setup.</span></span><input data-solver="alpha" type="number" min="0.001" max="0.5" step="0.001" value="${solver.alpha}" /></label>
       <label>Open-cost search weight <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain open-cost search weight">?</button><span class="field-popover" hidden>Weight applied while searching the quadratic surrogate. Final reporting uses the full open cost.</span></span><input data-solver="alpha_open" type="number" min="0" max="10" step="0.01" value="${solver.alpha_open}" /></label>
-      <label>One-officer penalty <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain one-officer penalty">?</button><span class="field-popover" hidden>Notebook QUBO penalty shown for parity. This app enforces eligibility and no double-booking directly.</span></span><input data-solver="one_officer_penalty" type="number" min="0" step="1" value="${solver.one_officer_penalty}" /></label>
+      <label>One-officer penalty <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain one-officer penalty">?</button><span class="field-popover" hidden>Pairwise QUBO penalty for assigning one officer to multiple skills in the same period.</span></span><input data-solver="one_officer_penalty" type="number" min="0" step="1" value="${solver.one_officer_penalty}" /></label>
+      <label>SA reads <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain SA reads">?</button><span class="field-popover" hidden>Number of independent simulated-annealing samples. The notebook default is 200.</span></span><input data-solver="num_reads" type="number" min="1" max="10000" step="1" value="${solver.num_reads ?? 200}" /></label>
+      <label>SA sweeps <span class="tip-wrap"><button class="tip" type="button" aria-label="Explain SA sweeps">?</button><span class="field-popover" hidden>Annealing updates per read. The notebook default is 400.</span></span><input data-solver="num_sweeps" type="number" min="1" max="100000" step="1" value="${solver.num_sweeps ?? 400}" /></label>
       <label>Random seed<input data-solver="seed" type="number" min="0" step="1" value="${solver.seed}" /></label>
     </div>
     <div class="probability-editor"><p>Five-scenario probabilities</p><div>${problem.probabilities.map((value, index) => `<label>p${index + 1}<input data-probability="${index}" type="number" min="0" max="1" step="0.05" value="${value}" /></label>`).join('')}</div><small>Must sum to 1. The default is 0.1 / 0.2 / 0.4 / 0.2 / 0.1.</small></div>`;
@@ -171,6 +185,7 @@ function normalizeVqeView(result) {
 function renderResults(result) {
   const summary = result.summary;
   const vqe = normalizeVqeView(result);
+  const sa = result.sa || {sampler: 'Unavailable — restart the server', num_reads: 0, num_sweeps: 0, best_energy: 0, variables: vqe.logical_qubits, interactions: null};
   const direction = summary.reduction >= 0 ? 'cuts' : 'increases';
   const accentClass = summary.reduction >= 0 ? '' : 'negative';
   $('#runtime').textContent = `${number(summary.runtime_ms, 0)} ms · ${summary.total_officers} officers`;
@@ -198,11 +213,28 @@ function renderResults(result) {
       <article class="accent"><p>Optimized plan</p><strong>${number(summary.optimized.total)}</strong><span>${number(summary.optimized.open_cost)} open + ${number(summary.optimized.shortfall_cost)} risk</span></article>
       <article><p>Roster utilization</p><strong>${summary.optimized_assignments}</strong><span>officer-period assignments</span></article>
     </div>
+    <article class="sa-card">
+      <div class="card-title"><div><p class="overline">Classical sampling run</p><h3>Simulated annealing solved the QUBO</h3></div><span class="sa-badge">SA · EXECUTED</span></div>
+      <div class="sa-metrics">
+        <article><strong>${Number(sa.variables ?? 0).toLocaleString()}</strong><span>binary variables</span></article>
+        <article><strong>${Number(sa.interactions ?? 0).toLocaleString()}</strong><span>pairwise terms</span></article>
+        <article><strong>${Number(sa.num_reads ?? 0).toLocaleString()} × ${Number(sa.num_sweeps ?? 0).toLocaleString()}</strong><span>reads × sweeps</span></article>
+        <article><strong>${number(sa.best_energy, 3)}</strong><span>best QUBO energy</span></article>
+      </div>
+    </article>
     <article class="comparison-card">
       <div class="card-title"><div><p class="overline">Cost composition</p><h3>Nominal vs optimized</h3></div><button class="text-button" data-scroll-vqe>VQE guide ↓</button></div>
       ${costBar('Nominal', summary.nominal, maxTotal)}
       ${costBar('Optimized', summary.optimized, maxTotal)}
       <div class="legend"><span><i></i> Open cost</span><span><b></b> Expected shortfall</span></div>
+    </article>
+    <article class="formula-card">
+      <div class="card-title"><div><p class="overline">Model equations</p><h3>From uncertain demand to a sampled QUBO</h3></div><span class="table-hint">same formulation as the notebook</span></div>
+      <div class="formula-grid">
+        <section><span>1 · Exact expected shortfall</span><div class="math-display" data-tex="\\mathbb{E}\\!\\left[(D_{s,t}-n_{s,t})^+\\right]=\\sum_v p_v\\,\\max\\!\\left(v-n_{s,t},0\\right)">E[(Dₛ,ₜ−nₛ,ₜ)⁺] = Σᵥpᵥ max(v−nₛ,ₜ,0)</div><p>For each candidate counter count <em>n</em>, this is the average unmet demand under the five demand scenarios. It is also used to evaluate the final sampled plan exactly.</p></section>
+        <section><span>2 · Quadratic approximation</span><div class="math-display" data-tex="\\widehat{L}_{s,t}(n)=a_{2,s,t}n^2+a_{1,s,t}n+a_{0,s,t}">L̂ₛ,ₜ(n) = a₂,ₛ,ₜn² + a₁,ₛ,ₜn + a₀,ₛ,ₜ</div><p>The exact shortfall curve is fitted by a parabola so it can be represented using linear and pairwise binary-variable terms.</p></section>
+        <section><span>3 · QUBO objective</span><div class="math-display math-display-wide" data-tex="\\begin{aligned}H_{\\mathrm{QUBO}} &amp;= \\alpha\\sum_{o,s,t}c_sx_{o,s,t} \\\\ &amp;\\quad +P_{\\mathrm{one}}\\sum_{o,t}\\sum_{s&lt;s'}x_{o,s,t}x_{o,s',t} \\\\ &amp;\\quad +\\sum_{s,t}p_s\\,\\widehat{L}_{s,t}\\!\\left(\\sum_o x_{o,s,t}\\right)\\end{aligned}">H_QUBO = opening cost + one-officer penalty + expected shortfall</div><p><em>x</em> is 1 when an eligible officer staffs a counter. The three terms score opening cost, penalize double-booking, and approximate expected shortage cost. SA samples low-energy bitstrings.</p></section>
+      </div>
     </article>
     <article class="vqe-card" id="vqe-panel">
       <div class="vqe-heading">
@@ -219,14 +251,14 @@ function renderResults(result) {
       <div class="vqe-output">
         <div class="vqe-scale">
           <p class="overline">This problem as a direct Ising model</p>
-          <div><article><strong>${vqe.logical_qubits == null ? '—' : vqe.logical_qubits.toLocaleString()}</strong><span>logical qubits</span></article><article><strong>${vqe.hamiltonian_terms == null ? '—' : vqe.hamiltonian_terms.toLocaleString()}</strong><span>Hamiltonian terms</span></article><article><strong>${number(vqe.reference_exact_loss)}</strong><span>exact reference loss</span></article></div>
+          <div><article><strong>${vqe.logical_qubits == null ? '—' : vqe.logical_qubits.toLocaleString()}</strong><span>logical qubits</span></article><article><strong>${vqe.hamiltonian_terms == null ? '—' : vqe.hamiltonian_terms.toLocaleString()}</strong><span>Hamiltonian terms</span></article><article><strong>${number(vqe.reference_exact_loss)}</strong><span>exact-evaluated SA loss</span></article></div>
         </div>
         <div class="trace-card">
           <div><p class="overline">Characteristic VQE output</p><strong>Energy should trend down</strong><span>Illustrative convergence trace</span></div>
           <div class="trace-demo" aria-label="Illustrative descending VQE energy trace"><i style="height:88%"></i><i style="height:72%"></i><i style="height:60%"></i><i style="height:51%"></i><i style="height:46%"></i><i style="height:43%"></i></div>
         </div>
       </div>
-      <p class="vqe-honesty"><b>Why no VQE number here?</b> The current backend gives a stable exact feasible reference. A real VQE result would depend on the ansatz, optimizer, shot count, and hardware noise, so this panel labels the mapping without inventing a quantum run.</p>
+      <p class="vqe-honesty"><b>Why no VQE number here?</b> The current backend samples this QUBO with classical simulated annealing. A real VQE result would depend on the ansatz, optimizer, shot count, and hardware noise, so this panel labels the optional mapping without inventing a quantum run.</p>
     </article>
     <article class="plan-card">
       <div class="card-title"><div><p class="overline">Staffing decision</p><h3>Counters to open</h3></div><span class="table-hint">nominal → optimized</span></div>
@@ -240,6 +272,7 @@ function renderResults(result) {
       <summary><div><p class="overline">Eligibility</p><h3>Skill capacity &amp; decoded assignments</h3></div><span>View roster</span></summary>
       <div class="detail-content"><div class="capacity-grid">${result.skill_totals.map((skill) => `<article><span>${skill.key}</span><div><strong>${skill.qualified_officers}</strong><small>${escapeHtml(skill.label)}-qualified</small></div></article>`).join('')}</div>${assignmentMarkup(result)}</div>
     </details>`;
+  renderMath($('#result-content'));
   document.querySelectorAll('[data-scroll-vqe]').forEach((button) => button.addEventListener('click', () => $('#vqe-panel').scrollIntoView({behavior: 'smooth', block: 'center'})));
 }
 
@@ -355,6 +388,7 @@ $('#export-json').addEventListener('click', () => {
   link.href = URL.createObjectURL(blob); link.download = 'checkpoint-problem.json'; link.click(); URL.revokeObjectURL(link.href);
 });
 
+renderMath(document);
 loadDefaults().catch((error) => {
   $('#input-error').textContent = `Could not start the app: ${error.message}`;
   $('#input-error').hidden = false;

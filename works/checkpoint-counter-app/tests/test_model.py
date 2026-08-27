@@ -28,9 +28,22 @@ class CheckpointModelTests(unittest.TestCase):
         self.assertAlmostEqual(result["summary"]["optimized"]["total"], 169.5)
         self.assertAlmostEqual(result["summary"]["reduction"], 49.5)
         self.assertEqual(result["summary"]["optimized_assignments"], 120)
+        self.assertTrue(result["sa"]["executed"])
+        self.assertEqual(result["sa"]["sampler"], "dwave.samplers.SimulatedAnnealingSampler")
+        self.assertEqual(result["sa"]["num_reads"], 200)
+        self.assertEqual(result["sa"]["num_sweeps"], 400)
+        self.assertEqual(result["sa"]["variables"], 440)
+        self.assertEqual(result["sa"]["interactions"], 6480)
+        self.assertTrue(result["sa"]["feasible"])
         self.assertFalse(result["vqe_view"]["executed"])
         self.assertEqual(result["vqe_view"]["logical_qubits"], 440)
         self.assertEqual(result["vqe_view"]["hamiltonian_terms"], 6920)
+
+    def test_seeded_sa_is_reproducible(self):
+        first = solve_problem(default_problem())
+        second = solve_problem(default_problem())
+        self.assertEqual(first["assignments"], second["assignments"])
+        self.assertEqual(first["sa"]["best_energy"], second["sa"]["best_energy"])
 
     def test_decoded_assignments_respect_skills_and_one_slot_rule(self):
         problem = default_problem()

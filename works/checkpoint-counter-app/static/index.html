@@ -6,7 +6,9 @@
     <meta name="theme-color" content="#121816" />
     <title>Checkpoint Counter Optimization</title>
     <meta name="description" content="Explore uncertainty-aware checkpoint staffing with QAE-informed expected shortfall." />
-    <link rel="stylesheet" href="/styles.css?v=5" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/styles.css?v=10" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.js" integrity="sha384-ykMNcWQhhTUb0YV9SPpPUFURHZ+tWmubkakGBP+OgNK/UXdO2gtzglWx0Rj9hnO3" crossorigin="anonymous"></script>
   </head>
   <body>
     <header class="topbar">
@@ -19,9 +21,10 @@
             <div class="popover-head"><div><span class="bubble-tag">QUICK GUIDE</span><h2>How the model thinks</h2></div><button id="close-help" aria-label="Close method notes">×</button></div>
             <div class="popover-body">
               <article><b>1</b><div><h3>Demand can wobble</h3><p>Five scenarios are created around each nominal demand value. CV controls how wide that wobble is.</p></div></article>
-              <article><b>2</b><div><h3>Short queues cost less</h3><p><code>E[(D - n)⁺] = Σᵥ pᵥ max(v - n, 0)</code> measures the average unmet demand at staffing level <em>n</em>.</p></div></article>
+              <article><b>2</b><div><h3>Short queues cost less</h3><p><span class="math-inline" data-tex="\mathbb{E}[(D-n)^+]=\sum_v p_v\max(v-n,0)">E[(D−n)⁺] = Σᵥ pᵥ max(v−n,0)</span> measures the average unmet demand at staffing level <em>n</em>.</p></div></article>
               <article><b>3</b><div><h3>QAE checks the expectation</h3><p>Probabilities and shortfall are encoded as amplitudes. This app evaluates the noiseless payoff amplitude analytically.</p></div></article>
-              <article><b>4</b><div><h3>VQE is an optional solver view</h3><p>The QUBO can become an Ising Hamiltonian for VQE. This build shows that mapping clearly, but uses a deterministic exact reference solver.</p></div></article>
+              <article><b>4</b><div><h3>A quadratic curve becomes a QUBO</h3><p><span class="math-inline" data-tex="\widehat{L}(n)=a_2n^2+a_1n+a_0">L̂(n)=a₂n²+a₁n+a₀</span> approximates the exact shortfall curve. Eligible officer decisions become binary variables, with pairwise penalties preventing double-booking.</p></div></article>
+              <article><b>5</b><div><h3>SA samples low-energy plans</h3><p>The app builds the notebook's explicit QUBO and runs classical simulated annealing with configurable reads, sweeps, and seed. QA and VQE are not executed.</p></div></article>
             </div>
           </aside>
         </div>
@@ -46,6 +49,7 @@
             <div><p class="overline">Problem setup</p><h2>Model inputs</h2></div>
             <span class="status-pill" id="problem-status">DEFAULT</span>
           </div>
+          <button class="run-button" id="run-button"><span>Run optimization</span><b>→</b></button>
           <nav class="step-nav" aria-label="Input sections">
             <button class="active" data-tab="demand"><span>01</span> Demand</button>
             <button data-tab="officers"><span>02</span> Officers</button>
@@ -79,7 +83,6 @@
             </section>
           </div>
           <div class="error-box" id="input-error" role="alert" hidden></div>
-          <button class="run-button" id="run-button"><span>Run optimization</span><b>→</b></button>
         </aside>
 
         <section class="results" id="results" aria-live="polite">
@@ -94,6 +97,6 @@
       </section>
     </main>
 
-    <script src="/app.js?v=4"></script>
+    <script defer src="/app.js?v=8"></script>
   </body>
 </html>

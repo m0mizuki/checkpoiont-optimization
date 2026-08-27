@@ -33,7 +33,7 @@ h1 { max-width: 840px; margin: 10px 0 8px; font-family: Georgia, "Times New Roma
 .hero-mark span { background: var(--dark); border-radius: 4px; }
 .hero-mark span:nth-child(2), .hero-mark span:nth-child(3) { background: var(--acid); }
 .workspace { padding: 28px 0 64px; display: grid; grid-template-columns: minmax(300px, 400px) 1fr; gap: 24px; }
-.control-panel, .results { border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); }
+.control-panel, .results { min-width: 0; border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); }
 .control-panel { padding: 24px; display: flex; flex-direction: column; min-height: 620px; }
 .panel-heading, .results-heading, .card-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 h2, h3 { margin: 4px 0 0; font-size: 22px; letter-spacing: -.03em; }
@@ -47,7 +47,7 @@ h2, h3 { margin: 4px 0 0; font-size: 22px; letter-spacing: -.03em; }
 .mini-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 12px 0 16px; }
 .mini-grid span { height: 26px; border: 1px solid #d3d6cc; background: #f5f6f1; }
 .control-placeholder p { color: var(--muted); line-height: 1.5; font-size: 13px; }
-.run-button { margin-top: auto; height: 54px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border: 0; background: var(--acid); font-weight: 900; cursor: pointer; }
+.run-button { margin-top: 18px; height: 54px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border: 0; background: var(--acid); font-weight: 900; cursor: pointer; }
 .run-button b { font-size: 22px; }
 .results { padding: 28px; }
 .hero-result { margin-top: 22px; padding: 28px; display: grid; grid-template-columns: 1fr auto; align-items: end; background: var(--dark); color: white; position: relative; overflow: hidden; }
@@ -62,7 +62,7 @@ h2, h3 { margin: 4px 0 0; font-size: 22px; letter-spacing: -.03em; }
 .metric-grid p { margin: 0 0 8px; color: var(--muted); font-size: 11px; }
 .metric-grid strong { display: block; font-family: Georgia, serif; font-size: 30px; font-weight: 500; }
 .metric-grid span { color: var(--muted); font-size: 10px; }
-.comparison-card { padding: 22px; border: 1px solid var(--line); }
+.comparison-card { margin-top: 16px; padding: 22px; border: 1px solid var(--line); }
 .text-button { padding: 8px 12px; border: 0; color: #647000; font-size: 11px; }
 .bar-row { margin-top: 22px; display: grid; grid-template-columns: 75px 1fr 48px; gap: 12px; align-items: center; font-size: 11px; }
 .bar-row > strong { text-align: right; }
@@ -290,6 +290,27 @@ h1 { max-width: 910px; margin: 15px 0 12px; font-family: Inter, ui-sans-serif, s
 .field-popover { position: absolute; z-index: 60; top: 23px; left: -12px; width: 220px; padding: 10px 11px; border: 1px solid #4d425a; border-radius: 11px; background: #fff8d8; color: #574f5e; box-shadow: 0 10px 25px rgba(57,42,69,.16); font-size: 9px; font-weight: 600; line-height: 1.45; text-transform: none; letter-spacing: 0; }
 .tip { border-color: #9f91b0; background: white; color: #6d52d7; }
 
+/* Simulated annealing and model equations */
+.sa-card, .formula-card { margin-top: 16px; padding: 22px; border: 2px solid var(--line); border-radius: 17px; background: white; }
+.sa-card { background: linear-gradient(135deg, #f7f4ff, #eeebff); }
+.sa-badge { padding: 7px 9px; border-radius: 9px; background: var(--purple); color: white; font-size: 8px; font-weight: 900; letter-spacing: .07em; white-space: nowrap; }
+.sa-metrics { margin-top: 15px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.sa-metrics article { padding: 12px; border: 1px solid #dcd5ee; border-radius: 12px; background: white; }
+.sa-metrics strong, .sa-metrics span { display: block; }
+.sa-metrics strong { font-size: 16px; }
+.sa-metrics span { margin-top: 3px; color: var(--muted); font-size: 8px; }
+.formula-grid { min-width: 0; margin-top: 17px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.formula-grid section { min-width: 0; padding: 16px; border: 1px solid #ded8ec; border-radius: 14px; background: #fbfaff; }
+.formula-grid section:last-child { grid-column: 1 / -1; }
+.formula-grid section > span { display: block; color: #6254aa; font-size: 9px; font-weight: 850; letter-spacing: .04em; text-transform: uppercase; }
+.math-inline { display: inline-block; padding: 1px 4px; border-radius: 5px; background: #eeeaff; color: #443874; vertical-align: middle; }
+.math-inline .katex { font-size: 1em; }
+.formula-grid .math-display { min-width: 0; min-height: 62px; margin-top: 10px; padding: 13px 14px; display: flex; align-items: center; justify-content: center; overflow-x: auto; overflow-y: hidden; border-radius: 10px; background: #eeeaff; color: #443874; line-height: 1.5; }
+.formula-grid .math-display .katex-display { min-width: max-content; margin: 0; }
+.formula-grid .math-display .katex { font-size: 1.08em; }
+.formula-grid .math-display-wide .katex { font-size: 1em; }
+.formula-grid p { margin: 10px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+
 /* VQE explainer output */
 .vqe-card { margin-top: 16px; padding: 24px; border: 1px solid #ded3f5; border-radius: 20px; background: linear-gradient(145deg, #fbf9ff, #f4efff); }
 .vqe-heading { display: flex; justify-content: space-between; gap: 20px; }
@@ -318,6 +339,7 @@ h1 { max-width: 910px; margin: 15px 0 12px; font-family: Inter, ui-sans-serif, s
   .workspace { grid-template-columns: 1fr; }
   .vqe-flow { grid-template-columns: 1fr 1fr; }.vqe-flow > i { display: none; }
   .vqe-output { grid-template-columns: 1fr; }
+  .sa-metrics { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 560px) {
@@ -329,6 +351,12 @@ h1 { max-width: 910px; margin: 15px 0 12px; font-family: Inter, ui-sans-serif, s
   .trace-card { grid-template-columns: 1fr; }
   .help-popover { position: fixed; top: 62px; right: 10px; left: 10px; width: auto; }
   .popover-arrow { display: none; }
+  .formula-grid, .sa-metrics { grid-template-columns: 1fr; }
+  .formula-grid section:last-child { grid-column: auto; }
+  .formula-grid .math-display { justify-content: flex-start; }
+  .formula-grid .math-display .katex { font-size: .93em; }
+  .sa-card .card-title, .formula-card .card-title { display: block; }
+  .sa-badge, .formula-card .table-hint { display: inline-block; margin-top: 9px; }
 }
 
 .solve-progress { min-height: 330px; display: grid; place-items: center; align-content: center; gap: 9px; color: var(--muted); text-align: center; }

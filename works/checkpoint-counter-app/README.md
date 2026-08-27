@@ -2,15 +2,15 @@
 
 Checkpoint Counter Lab is a local browser application for exploring uncertainty-aware checkpoint counter staffing. It is based on `QAE/checkpoint_counter_final.ipynb`, with supporting QAE concepts taken from `QAE/2409.07183v1.pdf`.
 
-The default problem exactly preserves the notebook's current data:
+The default problem follows the notebook's demand, cost, and skill structure. The source material is inconsistent about roster size: its class table totals 31, while the stated problem size is 30. This local default uses the stated 30-officer version by setting Class 1 to 23 officers.
 
-- 30 officers in five skill classes (the current local default uses 23 Class 1 officers)
+- 30 officers in five skill classes
 - four checkpoint types: Human (A), Motorcycle (B), Car (C), and Truck (D)
 - Morning, Lunch, Afternoon, and Night demand
 - five-point stochastic demand with skill-specific coefficients of variation
 - the notebook's counter-opening costs, shortage penalties, and solver settings
 
-With those defaults, the application reproduces the notebook's expected-loss comparison:
+With the local 30-officer defaults and the seeded SA settings, the application returns:
 
 | Plan | Open cost | Expected shortfall cost | Total |
 | --- | ---: | ---: | ---: |
@@ -28,17 +28,19 @@ The left-side editor supports:
 - officer-class counts and skill eligibility;
 - checkpoint labels, demand volatility (CV), open cost, and shortage penalty;
 - five demand-scenario probabilities;
-- QAE epsilon/alpha and QUBO-related search settings;
+- QAE epsilon/alpha, QUBO penalty, SA reads/sweeps, and random seed;
 - importing or exporting the complete problem as JSON.
 
 The results emphasize the loss comparison, recommended counter counts, exact cost breakdown, QAE shortfall checks, a clearly labeled VQE view, skill capacity, and decoded officer assignments. Short explanations use in-page speech bubbles and expandable result sections, so no browser alert or modal dialog interrupts normal use.
+
+The equation cards are typeset from TeX with pinned KaTeX 0.18.4 assets loaded from jsDelivr. If the CDN is unavailable, the same equations remain visible as readable text fallbacks.
 
 ## Run locally
 
 Requirements:
 
 - Python 3.10 or newer
-- `numpy`
+- `numpy`, `dimod`, and `dwave-samplers` (installed by `requirements.txt`)
 
 From this directory:
 
@@ -50,8 +52,6 @@ python app.py
 ```
 
 Open [http://127.0.0.1:8765](http://127.0.0.1:8765) in a browser. The server binds to localhost only.
-
-If Python is already configured with NumPy, `python app.py` is sufficient.
 
 ## Docker and Cloud Run
 
@@ -111,7 +111,7 @@ The notebook loads `sqrt(p(v))` as state amplitudes and uses controlled `Ry` rot
 
 To keep this local application small and easy to run, the backend evaluates that noiseless statevector amplitude analytically instead of requiring Qiskit. The displayed QAE estimate is mathematically identical to the exact payoff-ancilla probability for this five-outcome model. The displayed interval is an epsilon-target envelope, not a hardware-noise or shot-sampling confidence interval.
 
-### QUBO-compatible optimization
+### QUBO and simulated annealing
 
 As in the notebook, the exact shortfall curve is fitted with
 
@@ -119,9 +119,19 @@ As in the notebook, the exact shortfall curve is fitted with
 L_hat(n) = a2*n^2 + a1*n + a0.
 ```
 
-The application searches all reachable counter-count combinations under officer skill eligibility and selects the minimum of this same quadratic surrogate. This deterministic feasible search replaces simulated annealing, so repeated runs are stable and no penalty violation can slip into the decoded answer. The final comparison is evaluated against the exact discrete shortfall curve, just like the notebook's final validation.
+Following `checkpoint_counter_final.ipynb`, the application creates one binary variable `x[o,s,t]` for every officer, eligible skill, and time period. It expands `n[s,t] = sum_o x[o,s,t]` into linear and pairwise terms and builds
 
-The `one_officer_penalty` setting is retained and reported for notebook/JSON parity. Direct feasibility enforcement makes it unnecessary in the local solver.
+```text
+H_QUBO = alpha * sum c[s] x[o,s,t]
+       + P_one * sum x[o,s,t] x[o,s',t]
+       + sum p[s] * L_hat[s,t](sum_o x[o,s,t]).
+```
+
+Skill eligibility is enforced by omitting ineligible variables. The pairwise `P_one` term penalizes assigning one officer to more than one skill in a period.
+
+The QUBO dictionary is converted with `dimod.BinaryQuadraticModel.from_qubo` and sampled by `dwave.samplers.SimulatedAnnealingSampler`. Defaults match the notebook: 200 reads, 400 sweeps, and seed 7. The lowest-energy sample is decoded and checked for double-booking; if it is infeasible, the API asks for a larger penalty or sampling budget. Because SA is heuristic, the result is the best sampled plan, not a proof of the global optimum. The final comparison is evaluated against the exact discrete shortfall curve, just like the notebook's final validation.
+
+The editable `one_officer_penalty` is therefore active in the app's QUBO, not merely retained as notebook metadata.
 
 ### VQE view
 
@@ -133,7 +143,7 @@ The result page also explains how the same QUBO could be handled by a Variationa
 4. update the circuit parameters with a classical optimizer;
 5. sample low-energy bitstrings and check staffing feasibility.
 
-The panel reports the direct-mapping scale (logical qubits and Hamiltonian terms), the exact reference loss, and the characteristic VQE outputs: an energy-convergence trace and candidate bitstrings. It is deliberately labeled **VQE not executed**. The backend does not fabricate a VQE result; a real value would depend on the ansatz, optimizer, shot count, and hardware noise.
+The panel reports the direct-mapping scale (logical qubits and Hamiltonian terms), the exact evaluation of the SA plan, and the characteristic VQE outputs: an energy-convergence trace and candidate bitstrings. It is deliberately labeled **VQE not executed**. The backend does not fabricate a VQE result; a real value would depend on the ansatz, optimizer, shot count, and hardware noise.
 
 ## API
 
@@ -149,7 +159,7 @@ Invalid input returns HTTP 400 with an English error message.
 python -m unittest discover -s tests -v
 ```
 
-The test suite checks the current default roster totals, worked stochastic distribution, default 219.00/169.50 result, decoded assignment eligibility, VQE mapping scale, custom-cost behavior, and validation errors.
+The test suite checks the current default roster totals, worked stochastic distribution, reproducible seeded SA output, explicit QUBO size, decoded assignment eligibility, custom-cost behavior, and validation errors.
 
 ## Project layout
 

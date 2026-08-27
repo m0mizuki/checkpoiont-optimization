@@ -9,11 +9,13 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import dataclass
-from itertools import product
+from itertools import combinations, product
 from math import ceil, pi
 from typing import Any
 
+import dimod
 import numpy as np
+from dwave.samplers import SimulatedAnnealingSampler
 
 
 SKILL_KEYS = ("A", "B", "C", "D")
@@ -53,6 +55,8 @@ def default_problem() -> dict[str, Any]:
             "alpha": 0.05,
             "alpha_open": 0.05,
             "one_officer_penalty": 20.0,
+            "num_reads": 200,
+            "num_sweeps": 400,
             "seed": 7,
         },
     }
@@ -150,6 +154,8 @@ def validate_problem(raw: dict[str, Any]) -> dict[str, Any]:
         "alpha": _number(solver.get("alpha", 0.05), "QAE alpha", 0.001, 0.5),
         "alpha_open": _number(solver.get("alpha_open", 0.05), "Open-cost search weight", 0.0, 10.0),
         "one_officer_penalty": _number(solver.get("one_officer_penalty", 20.0), "One-officer penalty", 0.0, 100000.0),
+        "num_reads": int(_number(solver.get("num_reads", 200), "SA reads", 1, 10000)),
+        "num_sweeps": int(_number(solver.get("num_sweeps", 400), "SA sweeps", 1, 100000)),
         "seed": int(_number(solver.get("seed", 7), "Seed", 0, 2147483647)),
     }
     return problem
@@ -214,22 +220,63 @@ def qae_statevector_estimate(
     }
 
 
-def _reachable_counts(roster: list[dict[str, Any]], caps: tuple[int, int, int, int]) -> set[tuple[int, int, int, int]]:
-    states = {(0, 0, 0, 0)}
+def _qubo_variable(officer_id: str, skill: str, period: str) -> str:
+    return f"x[{officer_id},{skill},{period}]"
+
+
+def build_staffing_qubo(
+    problem: dict[str, Any],
+    roster: list[dict[str, Any]],
+    loss_curves: dict[tuple[str, str], dict[str, Any]],
+) -> tuple[dict[tuple[str, str], float], list[tuple[str, str, str, str]]]:
+    """Build the notebook's officer-by-skill-by-period QUBO.
+
+    Each eligible x[o,s,t] is a binary decision.  Linear terms represent
+    counter-opening cost and the linear part of the fitted shortfall curve;
+    pairwise terms represent the squared shortfall curve and the at-most-one
+    assignment penalty for every officer-period slot.
+    """
+
+    variables = [
+        (officer["id"], skill, period, _qubo_variable(officer["id"], skill, period))
+        for officer in roster
+        for skill in SKILL_KEYS
+        for period in problem["periods"]
+        if skill in officer["skills"]
+    ]
+    variable_names = {(officer_id, skill, period): name for officer_id, skill, period, name in variables}
+    q: dict[tuple[str, str], float] = {}
+
+    def add_q(first: str, second: str, value: float) -> None:
+        pair = (first, second) if first <= second else (second, first)
+        q[pair] = q.get(pair, 0.0) + float(value)
+
+    skills_by_key = {item["key"]: item for item in problem["skills"]}
+
+    # H_open: one counter is opened for every active officer assignment.
+    for _, skill, _, name in variables:
+        add_q(name, name, problem["solver"]["alpha_open"] * skills_by_key[skill]["open_cost"])
+
+    # H_one: discourage assigning one officer to multiple skills in one period.
     for officer in roster:
-        next_states = set(states)
-        for state in states:
-            for key in officer["skills"]:
-                index = SKILL_KEYS.index(key)
-                if state[index] >= caps[index]:
-                    continue
-                candidate = list(state)
-                candidate[index] += 1
-                next_states.add(tuple(candidate))
-        states = next_states
-        if len(states) > 450_000:
-            raise ProblemError("This custom roster creates too many feasible staffing combinations; reduce officers or demand.")
-    return states
+        for period in problem["periods"]:
+            names = [variable_names[(officer["id"], skill, period)] for skill in officer["skills"]]
+            for first, second in combinations(names, 2):
+                add_q(first, second, problem["solver"]["one_officer_penalty"])
+
+    # H_shortfall: expand a2*(sum x)^2 + a1*(sum x) using x^2 = x.
+    for skill in SKILL_KEYS:
+        shortage_penalty = skills_by_key[skill]["shortage_penalty"]
+        eligible_officers = [officer for officer in roster if skill in officer["skills"]]
+        for period in problem["periods"]:
+            a2, a1, _ = loss_curves[(period, skill)]["coefficients"]
+            names = [variable_names[(officer["id"], skill, period)] for officer in eligible_officers]
+            for name in names:
+                add_q(name, name, shortage_penalty * (a2 + a1))
+            for first, second in combinations(names, 2):
+                add_q(first, second, shortage_penalty * 2 * a2)
+
+    return q, variables
 
 
 @dataclass
@@ -343,40 +390,71 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
                 "coefficients": coefficients,
             }
 
-    caps = tuple(
-        min(max_counters[key], max(max(distributions[(period, key)]) for period in problem["periods"]))
-        for key in SKILL_KEYS
-    )
-    reachable = _reachable_counts(roster, caps)
+    # Build and sample the same explicit QUBO used by checkpoint_counter_final.ipynb.
+    qubo, variables = build_staffing_qubo(problem, roster, loss_curves)
+    bqm = dimod.BinaryQuadraticModel.from_qubo(qubo)
+    sampler = SimulatedAnnealingSampler()
+    try:
+        sampleset = sampler.sample(
+            bqm,
+            num_reads=problem["solver"]["num_reads"],
+            num_sweeps=problem["solver"]["num_sweeps"],
+            seed=problem["solver"]["seed"],
+        )
+    except (TypeError, ValueError) as exc:
+        raise ProblemError(f"Simulated annealing could not sample this QUBO: {exc}") from exc
 
-    optimized_counts: dict[tuple[str, str], int] = {}
-    nominal_counts: dict[tuple[str, str], int] = {}
-    assignments: dict[str, dict[str, str]] = {}
+    best = sampleset.first
+    active_by_slot: dict[tuple[str, str], list[str]] = {}
+    for officer_id, skill, period, name in variables:
+        if int(best.sample.get(name, 0)) == 1:
+            active_by_slot.setdefault((period, officer_id), []).append(skill)
+
+    double_booked = {
+        (period, officer_id): skills
+        for (period, officer_id), skills in active_by_slot.items()
+        if len(skills) > 1
+    }
+    if double_booked:
+        first_slot, first_skills = next(iter(double_booked.items()))
+        period, officer_id = first_slot
+        raise ProblemError(
+            "The lowest-energy SA sample violates the one-officer constraint "
+            f"({officer_id} in {period}: {', '.join(first_skills)}). "
+            "Increase the one-officer penalty, reads, or sweeps and run again."
+        )
+
+    assignments: dict[str, dict[str, str]] = {period: {} for period in problem["periods"]}
+    optimized_counts = {(period, skill): 0 for period in problem["periods"] for skill in SKILL_KEYS}
+    for (period, officer_id), skills in active_by_slot.items():
+        skill = skills[0]
+        assignments[period][officer_id] = skill
+        optimized_counts[(period, skill)] += 1
+
+    nominal_counts = {
+        (period, skill): problem["demand"][period][skill]
+        for period in problem["periods"]
+        for skill in SKILL_KEYS
+    }
     surrogate_scores: dict[str, float] = {}
     warnings: list[str] = []
-
     for period in problem["periods"]:
-        def surrogate_score(counts: tuple[int, int, int, int]) -> float:
-            score = 0.0
-            for index, key in enumerate(SKILL_KEYS):
-                n = counts[index]
-                skill = skills_by_key[key]
-                a2, a1, a0 = loss_curves[(period, key)]["coefficients"]
-                score += problem["solver"]["alpha_open"] * skill["open_cost"] * n
-                score += skill["shortage_penalty"] * (a2 * n * n + a1 * n + a0)
-            return float(score)
+        score = 0.0
+        for skill in SKILL_KEYS:
+            n = optimized_counts[(period, skill)]
+            a2, a1, a0 = loss_curves[(period, skill)]["coefficients"]
+            score += problem["solver"]["alpha_open"] * skills_by_key[skill]["open_cost"] * n
+            score += skills_by_key[skill]["shortage_penalty"] * (a2 * n * n + a1 * n + a0)
+        surrogate_scores[period] = float(score)
 
-        best_counts = min(reachable, key=lambda counts: (surrogate_score(counts), -sum(counts), counts))
-        surrogate_scores[period] = surrogate_score(best_counts)
-        assignment = _assignment_for_counts(roster, best_counts)
-        assignments[period] = assignment
-        for index, key in enumerate(SKILL_KEYS):
-            optimized_counts[(period, key)] = best_counts[index]
-            nominal_counts[(period, key)] = problem["demand"][period][key]
-
-        nominal_tuple = tuple(problem["demand"][period][key] for key in SKILL_KEYS)
-        if nominal_tuple not in reachable:
-            warnings.append(f"The nominal demand target in {period} is not feasible for the submitted roster; it remains a cost benchmark only.")
+        nominal_tuple = tuple(problem["demand"][period][skill] for skill in SKILL_KEYS)
+        try:
+            _assignment_for_counts(roster, nominal_tuple)
+        except ProblemError:
+            warnings.append(
+                f"The nominal demand target in {period} is not feasible for the submitted roster; "
+                "it remains a cost benchmark only."
+            )
 
     def score_plan(counts: dict[tuple[str, str], int]) -> dict[str, float]:
         open_cost = 0.0
@@ -433,19 +511,10 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
             "optimized_counters": sum(optimized_counts[(period, key)] for period in problem["periods"]),
         })
 
-    # VQE-ready scale summary.  The local build does not pretend to execute a
-    # variational quantum circuit: these counts explain how the same QUBO would
-    # map to an Ising Hamiltonian and why a VQE run needs an ansatz, repeated
-    # measurements, and a classical parameter-update loop.
-    eligible_edges = sum(len(officer["skills"]) for officer in roster)
-    logical_qubits = eligible_edges * len(problem["periods"])
-    one_officer_couplers = len(problem["periods"]) * sum(
-        len(officer["skills"]) * (len(officer["skills"]) - 1) // 2 for officer in roster
-    )
-    shortfall_couplers = len(problem["periods"]) * sum(
-        max_counters[key] * (max_counters[key] - 1) // 2 for key in SKILL_KEYS
-    )
-    hamiltonian_terms = logical_qubits + one_officer_couplers + shortfall_couplers
+    # The sampled BQM is also the direct Ising/VQE mapping shown in the UI.
+    logical_qubits = bqm.num_variables
+    pairwise_terms = bqm.num_interactions
+    hamiltonian_terms = logical_qubits + pairwise_terms
 
     return {
         "summary": {
@@ -462,19 +531,30 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
         "period_results": period_results,
         "warnings": warnings,
         "method": {
-            "optimizer": "Exact feasible search over the notebook's quadratic QUBO surrogate",
+            "optimizer": "D-Wave Ocean SimulatedAnnealingSampler over the notebook's explicit QUBO",
             "qae": "Analytical statevector evaluation of the notebook's exact payoff-ancilla encoding",
             "evaluation": "Exact discrete expected-shortfall curve",
             "one_officer_penalty": problem["solver"]["one_officer_penalty"],
-            "note": "The one-officer penalty is shown for notebook parity; feasibility is enforced directly by the exact roster search.",
+            "note": "Eligibility is enforced by variable omission; one-officer feasibility is encoded by a pairwise QUBO penalty and verified after sampling.",
+        },
+        "sa": {
+            "executed": True,
+            "sampler": "dwave.samplers.SimulatedAnnealingSampler",
+            "num_reads": problem["solver"]["num_reads"],
+            "num_sweeps": problem["solver"]["num_sweeps"],
+            "seed": problem["solver"]["seed"],
+            "best_energy": float(best.energy),
+            "variables": logical_qubits,
+            "interactions": pairwise_terms,
+            "feasible": True,
         },
         "vqe_view": {
             "executed": False,
-            "status": "Exact reference - VQE not executed",
+            "status": "SA sampled - VQE not executed",
             "logical_qubits": logical_qubits,
             "hamiltonian_terms": hamiltonian_terms,
             "linear_terms": logical_qubits,
-            "pairwise_terms": one_officer_couplers + shortfall_couplers,
+            "pairwise_terms": pairwise_terms,
             "reference_exact_loss": optimized_score["total"],
             "reference_surrogate_energy": sum(surrogate_scores.values()),
             "loop": [
@@ -484,9 +564,10 @@ def solve_problem(raw_problem: dict[str, Any]) -> dict[str, Any]:
                 "Repeat, then sample the lowest-energy bitstring",
             ],
             "explanation": (
-                "VQE could target the Ising Hamiltonian made from this QUBO. "
+                "The staffing result was sampled classically with simulated annealing. "
+                "VQE could target the Ising Hamiltonian made from the same QUBO. "
                 "Its characteristic output is an energy-convergence trace and sampled bitstrings; "
-                "the local app reports a deterministic exact reference instead."
+                "this app does not execute a variational quantum circuit."
             ),
         },
         "assignments": assignments,
